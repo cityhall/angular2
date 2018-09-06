@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    
+    debugger
     this.loading = true;
     this.authenService.login(this.model.username, this.model.password).subscribe(data => {
       this.router.navigate([UrlConstants.HOME]);
