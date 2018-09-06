@@ -14,7 +14,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
   }
-  logout(){
+  logout() {
 localStorage.removeItem(SystemConstants.CURRENT_USER);
 this.utilityService.navigate(UrlConstants.LOGIN);
 }
