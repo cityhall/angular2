@@ -38,7 +38,8 @@
               "./node_modules/bootstrap/dist/js/bootstrap.min.js",
               "./node_modules/fastclick/lib/fastclick.js",
               "./node_modules/nprogress/nprogress.js",
-              "./node_modules/alertifyjs/build/alertify.js"
+              "./node_modules/alertifyjs/build/alertify.js",
+              "src/main.js"
             ]
           },
           "configurations": {
