@@ -3,6 +3,7 @@ import { DataService } from '../../core/services/data.service';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { NotificationService } from '../../core/services/notification.service';
 import { MessageConstants } from '../../core/common/message.constants';
+
 @Component({
   selector: 'app-role',
   templateUrl: './role.component.html',
@@ -23,6 +24,7 @@ export class RoleComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
+    this.searchText='ff';
   }
   loadData() {
     this._dataService.get('/api/appRole/getlistpaging?page=' + this.pageIndex + '&pageSize=' + this.pageSize + '&filter=' + this.filter)
