@@ -39,7 +39,8 @@
               "./node_modules/fastclick/lib/fastclick.js",
               "./node_modules/nprogress/nprogress.js",
               "./node_modules/alertifyjs/build/alertify.js",
-              "src/chris.js"
+              "./node_modules/moment/moment.js",
+              "./src/assets/js/chris.js"
             ]
           },
           "configurations": {

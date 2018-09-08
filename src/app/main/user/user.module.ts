@@ -1,7 +1,16 @@
+
+import { UserComponent } from './user.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserComponent } from './user.component';
-import { RouterModule,Routes } from '@angular/router'
+import { Routes, RouterModule } from '@angular/router';
+import { DataService } from '../../core/services/data.service';
+import { NotificationService } from '../../core/services/notification.service';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { FormsModule} from '@angular/forms';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
+import { Daterangepicker } from 'ng2-daterangepicker';
+import { SharedModule} from '../../SharedModule'
 
 const userRoutes:  Routes=[
   {path:'',redirectTo:'index',pathMatch:'full'},
@@ -10,8 +19,16 @@ const userRoutes:  Routes=[
 @NgModule({
   imports: [
     CommonModule,
+    PaginationModule,
+    FormsModule,
+    MultiselectDropdownModule,
+    Daterangepicker,
+    SharedModule,
+    ModalModule.forRoot(),
     RouterModule.forChild(userRoutes)
   ],
-  declarations: [UserComponent]
+
+  declarations: [UserComponent],
+  providers:[DataService,NotificationService]
 })
 export class UserModule { }

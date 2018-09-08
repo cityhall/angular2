@@ -50,7 +50,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let role of roles | FilterPipe: 'Id,Name':query">
+            <tr *ngFor="let role of roles | SearchPipe: 'Name,Description':query">
 
               <td>{{role.Name}}</td>
               <td>{{role.Description}}</td>
