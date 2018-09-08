@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard'
-import { audit } from 'rxjs/operators';
 export const appRoutes: Routes = [
     {
         path: '', redirectTo: 'login', pathMatch: 'full'

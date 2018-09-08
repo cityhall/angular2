@@ -41,9 +41,7 @@ export class RoleComponent implements OnInit {
         this.entity = res;
       })
   }
-  search() {
-    this.loadData();
-  }
+
   pageChanged(e: any): void {
     this.pageIndex = e.page;
     this.loadData();

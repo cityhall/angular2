@@ -7,7 +7,7 @@ import { NotificationService } from '../../core/services/notification.service';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { FormsModule} from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import {FilterPipe} from './../../search.pipe'
+import { SharedModule} from '../../SharedModule'
 
 const roleRoutes: Routes = [
   //localhost:4200/main/user
@@ -20,10 +20,11 @@ const roleRoutes: Routes = [
     CommonModule,
     PaginationModule,
     FormsModule,
+    SharedModule,
     ModalModule.forRoot(),
     RouterModule.forChild(roleRoutes)
   ],
-  declarations: [RoleComponent,FilterPipe],
+  declarations: [RoleComponent],
   providers:[DataService,NotificationService]
 })
 export class RoleModule { }

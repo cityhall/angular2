@@ -56,6 +56,7 @@ export class DataService {
     return this._http.post(SystemConstants.BASE_API + uri, data, { headers: newHeader })
       .pipe(catchError(this.handleError));
   }
+
   public handleError(error: any) {
     if (error.status == 401) {
       localStorage.removeItem(SystemConstants.CURRENT_USER);
@@ -68,9 +69,8 @@ export class DataService {
       this._utilityService.navigateToLogin();
     }
     else {
-      let errMsg = JSON.parse(error._body).Message;
+      let errMsg = JSON.parse(error.body).Message;
       this._notificationService.printErrorMessage(errMsg);
-
       return Observable.throw(errMsg);
     }
 

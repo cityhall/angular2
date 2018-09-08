@@ -4,3 +4,11 @@
     top: 6px;
     left: 22px;
 }
+.fixselect .dropdown-menu{
+    display: inline-grid !important;
+    padding: 5px 10px;
+    font-size: 14px;
+}
+.fixselect .input-group-prepend span i{
+    display: none !important;
+}
