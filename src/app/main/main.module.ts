@@ -5,8 +5,7 @@ import { mainRoutes } from './main.routes';
 import { RouterModule, Routes } from '@angular/router'
 import { UserModule } from './user/user.module';
 import { HomeModule } from './home/home.module';
-import { UtilityService} from '../core/services/utility.service';
-import { AuthenService} from '../core/services/authen.service';
+
 
 @NgModule({
   imports: [
@@ -17,6 +16,6 @@ import { AuthenService} from '../core/services/authen.service';
   ],
   declarations: [MainComponent],
   
-  providers:[UtilityService,AuthenService]
+  providers:[]
 })
 export class MainModule { }

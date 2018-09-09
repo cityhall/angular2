@@ -18,7 +18,7 @@ export class MainComponent implements OnInit {
     this.user =JSON.parse(localStorage.getItem(SystemConstants.CURRENT_USER));
   }
   logout() {
-    debugger
+    
     localStorage.removeItem(SystemConstants.CURRENT_USER);
     this.utilityService.navigate(UrlConstants.LOGIN);
   }

@@ -6,9 +6,9 @@ import { AuthenService } from './authen.service';
 import { NotificationService } from './notification.service';
 import { UtilityService } from './utility.service';
 import { MessageConstants } from './../common/message.constants';
-import { Observable } from 'rxjs';
+import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-
+declare var alertify: any;
 @Injectable()
 export class DataService {
   private headers = new HttpHeaders();
@@ -57,21 +57,22 @@ export class DataService {
       .pipe(catchError(this.handleError));
   }
 
-  public handleError(error: any) {
-    if (error.status == 401) {
+  public handleError(err: any) {
+   
+    if (err.status == 401) {
       localStorage.removeItem(SystemConstants.CURRENT_USER);
       this._notificationService.printErrorMessage(MessageConstants.LOGIN_AGAIN_MSG);
       this._utilityService.navigateToLogin();
     }
-    else if (error.status == 403) {
+    else if (err.status == 403) {
       localStorage.removeItem(SystemConstants.CURRENT_USER);
       this._notificationService.printErrorMessage(MessageConstants.LOGIN_AGAIN_MSG);
       this._utilityService.navigateToLogin();
     }
+   
     else {
-      let errMsg = JSON.parse(error.body).Message;
-      this._notificationService.printErrorMessage(errMsg);
-      return Observable.throw(errMsg);
+      alertify.error(err.error.Message);
+      return throwError(err );
     }
 
 

@@ -55,7 +55,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let user of users | SearchPipe: 'FullName,UserName':query">
-              <td><img [src]="user.Avatar" width="50"></td>
+              <td><img [src]="baselink+user.Avatar" width="50"></td>
               <td>{{user.UserName}}</td>
               <td>{{user.FullName}}</td>
               <td>{{user.Email}}</td>
@@ -89,7 +89,7 @@
         </button>
       </div>
       <div class="modal-body">
-          <form class="form-horizontal form-label-left" novalidate #addEditForm="ngForm" (ngSubmit)="saveChange(addEditForm.valid)" *ngIf="entity">
+          <form class="form-horizontal form-label-left" novalidate #addEditForm="ngForm" (ngSubmit)="saveChange(addEditForm)" *ngIf="entity">
             
           <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12">Họ tên</label>
@@ -157,15 +157,16 @@
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12">Avatar</label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="file" #avatar name="avatar" class="form-control">
+                <input class="form-control" #avatar type="file" name="photo" ng2FileSelect [uploader]="uploader" />
                 <p class="help-block label label-danger"> chỉ hỗ trợ định dạng *.png, *.jpg, *.jpeg </p>
                 <input type="hidden" [(ngModel)]="entity.Avatar" name="avatarUrl" />
               </div>
   
-              <div class="col-md-3 col-sm-3 col-xs-12" *ngIf="entity.Avatar">
-                <img [src]="entity.Avatar" width="128" />
+              <div class="col-md-3 col-sm-3 col-xs-12" >
+                <img [src]="baselink+entity.Avatar" width="128" />
               </div>
             </div>
+            
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12">Ngày sinh</label>
               <div class="col-md-9 col-sm-9 col-xs-12">
@@ -191,9 +192,9 @@
             </div>
             <div class="ln_solid"></div>
             <div class="form-group">
-              <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+              <div class="col-xs-12 ">
                 <button type="button" (click)="modalAddEdit.hide()" class="btn btn-primary">Hủy bỏ</button>
-                <button type="submit" class="btn btn-success" [disabled]="!addEditForm.form.valid">Cập nhật</button>
+                <button type="submit" class="btn btn-success pull-right" [disabled]="!addEditForm.form.valid">Cập nhật</button>
               </div>
             </div>
           </form>
