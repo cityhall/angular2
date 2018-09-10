@@ -35,7 +35,7 @@ export class UserComponent implements OnInit {
   public err: any;
   public searchText: string;
   public baselink: string = SystemConstants.BASE_API;
-  public uploader:FileUploader = new FileUploader({url: SystemConstants.BASE_API+'api/upload/saveImage',authToken: "Bearer " + this._auth.getLoggedInUser().access_token});
+  public uploader:FileUploader = new FileUploader({url: SystemConstants.BASE_API+'api/upload/saveImage?type=avatar',authToken: "Bearer " + this._auth.getLoggedInUser().access_token});
 
   public settings: IMultiSelectSettings = {
     enableSearch: true,
@@ -110,14 +110,22 @@ export class UserComponent implements OnInit {
   }
  
   saveChange(form: NgForm) {
-  
+   
     if (form.valid) {
       let fi = this.avatar.nativeElement;
+      this.entity.Roles = this.myRoles;
       if (fi.files.length > 0) {
         this.uploader.uploadAll();
-        this.saveData(form);
+        this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any): any => {
+          if(response){
+           this.entity.Avatar = response.slice(2,response.length-1);
+           this.saveData(form);
+           this.loadData();
+         }
+        }
       }else{
         this.saveData(form);
+        this.loadData();
       }
      
     }
@@ -153,8 +161,11 @@ export class UserComponent implements OnInit {
       this.loadData();
     })
   }
-  public selectGender(e) {
-    this.entity.Gender = e.target.value;
+  public selectGender(event) {
+    this.entity.Gender = event.target.value
+  }
+  public selectedDate(value: any) {
+    this.entity.BirthDay =  moment(value.end._d).format('DD/MM/YYYY');
   }
 }
 

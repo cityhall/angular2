@@ -1,33 +1,28 @@
 import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
-import { UrlConstants } from '../../core/common/url.constants';
+import { SystemConstants } from '../../core/common/system.constants';
 import { UtilityService } from './utility.service';
+import { FileUploader,FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
+import { AuthenService } from './../../core/services/authen.service';
 
 @Injectable()
 export class UploadService {
   public responseData: any;
+  public option = {url: SystemConstants.BASE_API + '/api/upload/saveImage', authToken: "Bearer " + this._auth.getLoggedInUser().access_token };
+  public uploader: FileUploader = new FileUploader(this.option);
+
+  constructor(private dataService: DataService, private utilityService: UtilityService,private _auth:AuthenService,) { }
+
+  postWithFile(url: string, postData: any) {
   
-  constructor(private dataService: DataService, private utilityService: UtilityService) { }
-
-  postWithFile(url: string, postData: any, files: File[]) {
-    let formData: FormData = new FormData();
-    formData.append('files', files[0], files[0].name);
-
-    if (postData !== "" && postData !== undefined && postData !== null) {
-      for (var property in postData) {
-        if (postData.hasOwnProperty(property)) {
-          formData.append(property, postData[property]);
-        }
-      }
-    }
     var returnReponse = new Promise((resolve, reject) => {
-      this.dataService.postFile(url, formData).subscribe(
-        res => {
-          this.responseData = res;
+      this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any): any => {
+
+        if(response){
+          this.responseData = response;
           resolve(this.responseData);
-        },
-        error => this.dataService.handleError(error)
-      );
+       }
+      }
     });
     return returnReponse;
   }

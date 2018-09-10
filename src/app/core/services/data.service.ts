@@ -51,9 +51,7 @@ export class DataService {
 
   }
   postFile(uri: string, data?: any) {
-    let newHeader = new HttpHeaders();
-    newHeader.set("Authorization", "Bearer " + this._authenService.getLoggedInUser().access_token);
-    return this._http.post(SystemConstants.BASE_API + uri, data, { headers: newHeader })
+       return this._http.post(SystemConstants.BASE_API + uri, data, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 

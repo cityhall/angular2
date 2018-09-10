@@ -4,7 +4,7 @@ import { UrlConstants } from '../core/common/url.constants';
 import { UtilityService } from '../core/services/utility.service';
 import { AuthenService } from '../core/services/authen.service';
 import {LoggedInUser} from '../core/domain/loggedin.user';
-
+declare var runjs : any;
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -15,6 +15,7 @@ export class MainComponent implements OnInit {
   constructor(private utilityService: UtilityService,private authenService:AuthenService) { }
 
   ngOnInit() {
+    new runjs();
     this.user =JSON.parse(localStorage.getItem(SystemConstants.CURRENT_USER));
   }
   logout() {
