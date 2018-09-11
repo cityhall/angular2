@@ -8,6 +8,9 @@ export const mainRoutes: Routes = [
             { path: 'user', loadChildren: './user/user.module#UserModule' },
             { path: 'function', loadChildren: './function/function.module#FunctionModule' },
             { path: 'role', loadChildren: './role/role.module#RoleModule' },
+            { path: 'product-category', loadChildren: './product-category/product-category.module#ProductCategoryModule' },
+            { path: 'product', loadChildren: './product/product.module#ProductModule' },
+
         ]
     }
 

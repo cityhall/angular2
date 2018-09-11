@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-declare var runjs : any;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

@@ -4,7 +4,6 @@ import { UrlConstants } from '../core/common/url.constants';
 import { UtilityService } from '../core/services/utility.service';
 import { AuthenService } from '../core/services/authen.service';
 import {LoggedInUser} from '../core/domain/loggedin.user';
-declare var runjs : any;
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',

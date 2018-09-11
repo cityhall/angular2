@@ -10,8 +10,6 @@ import {  FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-upl
 
 import { AuthenService } from './../../core/services/authen.service';
 import { IMultiSelectOption, IMultiSelectSettings } from 'angular-2-dropdown-multiselect';
-declare var moment: any;
-declare var $: any
 
 @Component({
   selector: 'app-user',
