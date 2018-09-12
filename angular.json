@@ -20,7 +20,12 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*", 
+                "input": "./node_modules/ckeditor/", 
+                "output": "./src/assets/js/ckeditor/"
+             }
             ],
             "styles": [
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",

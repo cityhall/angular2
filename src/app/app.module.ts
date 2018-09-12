@@ -8,11 +8,11 @@ import { appRoutes } from './app.routes';
 import { AuthGuard } from './core/guards/auth.guard';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { HttpClientModule } from '@angular/common/http';
-import { UtilityService} from '../app/core/services/utility.service';
-import { AuthenService} from '../app/core/services/authen.service';
+import { UtilityService } from '../app/core/services/utility.service';
+import { CkeditorConfigService } from '../app/core/services/ckeditor.service';
+import { AuthenService } from '../app/core/services/authen.service';
 import { DataService } from '../app/core/services/data.service';
 import { NotificationService } from '../app/core/services/notification.service';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +26,7 @@ import { NotificationService } from '../app/core/services/notification.service';
     PaginationModule.forRoot()
   ],
 
-  providers: [AuthGuard,UtilityService,AuthenService,DataService,NotificationService],
+  providers: [AuthGuard, UtilityService, AuthenService, DataService, NotificationService,CkeditorConfigService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

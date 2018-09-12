@@ -7,6 +7,7 @@ import { MessageConstants } from '../../core/common/message.constants';
 import { SystemConstants } from '../../core/common/system.constants';
 import { UploadService } from '../../core/services/upload.service';
 import { ModalDirective } from 'ngx-bootstrap/modal';
+import { CkeditorConfigService } from '../../core/services/ckeditor.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -29,9 +30,12 @@ export class ProductComponent implements OnInit {
   public filterCategoryID: number;
   public products: any[];
   public productCategories: any[];
-
+  ckeditorContent: string = '';
+  private myCkeditorConfig: any;
+  
   constructor(public _authenService: AuthenService,
     private _dataService: DataService,
+    private ckService: CkeditorConfigService,
     private notificationService: NotificationService,
     private utilityService: UtilityService, private uploadService: UploadService) {
   }
@@ -47,6 +51,7 @@ export class ProductComponent implements OnInit {
     this._dataService.get('/api/product/getall?page=' + this.pageIndex + '&pageSize=' + this.pageSize + '&keyword=' + this.filter + '&categoryId=' + this.filterCategoryID)
       .subscribe((response: any) => {
         this.products = response.Items;
+        console.log(this.products)
         this.pageIndex = response.PageIndex;
       }, error => this._dataService.handleError(error));
   }

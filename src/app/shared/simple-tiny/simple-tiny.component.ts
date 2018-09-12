@@ -15,24 +15,11 @@ export class SimpleTinyComponent implements  AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     tinymce.baseURL = "/assets/tinymce";
     tinymce.init({
-      file_browser_callback: function(field, url, type, win) {
-        tinymce.activeEditor.windowManager.open({
-            file: './src/assets/tinymce/plugins/kcfinder/browse.php?opener=tinymce4&field=' + field + '&type=' + type,
-            title: 'KCFinder',
-            width: 700,
-            height: 500,
-            inline: true,
-            close_previous: false
-        }, {
-            window: win,
-            input: field
-        });
-        return false;
-    },
       selector: '#' + this.elementId,
       language: 'vi_VN',
       skin_url: '/assets/tinymce/skins/lightgray',
       language_url: '/assets/tinymce/langs/vi_VN.js',
+
       plugins: "autosave autolink code codesample colorpicker emoticons fullscreen hr image imagetools media preview table textcolor wordcount",
       toolbar: "imageupload forecolor cut copy paste fontselect styleselect bold italic bold link preview code image media",
       setup: editor => {

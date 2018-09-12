@@ -10,12 +10,14 @@ import { UploadService } from './../../core/services/upload.service';
 import { Daterangepicker } from 'ng2-daterangepicker';
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 import { SimpleTinyComponent } from '../../shared/simple-tiny/simple-tiny.component';
+import { CKEditorModule } from 'ng2-ckeditor';
 
 @NgModule({
   imports: [
         CommonModule,
     ProductRouter,
     FormsModule,
+    CKEditorModule,
     PaginationModule,
     ModalModule,
     Daterangepicker,
