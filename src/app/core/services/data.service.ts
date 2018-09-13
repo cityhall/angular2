@@ -64,7 +64,7 @@ export class DataService {
     }
     else if (err.status == 403) {
       localStorage.removeItem(SystemConstants.CURRENT_USER);
-      this._notificationService.printErrorMessage(MessageConstants.LOGIN_AGAIN_MSG);
+      this._notificationService.printErrorMessage(MessageConstants.FORBIDDEN);
       this._utilityService.navigateToLogin();
     }
    

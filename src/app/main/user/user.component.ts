@@ -6,8 +6,7 @@ import { UploadService } from '../../core/services/upload.service';
 import { MessageConstants } from '../../core/common/message.constants';
 import { SystemConstants } from '../../core/common/system.constants';
 import { NgForm } from '@angular/forms';
-import {  FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
-
+import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { AuthenService } from './../../core/services/authen.service';
 import { IMultiSelectOption, IMultiSelectSettings } from 'angular-2-dropdown-multiselect';
 
@@ -117,6 +116,7 @@ export class UserComponent implements OnInit {
         this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any): any => {
           if(response){
            this.entity.Avatar = response.slice(2,response.length-1);
+           this.uploader.queue=[]
            this.saveData(form);
            this.loadData();
          }

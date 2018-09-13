@@ -11,6 +11,14 @@ import { Daterangepicker } from 'ng2-daterangepicker';
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 import { SimpleTinyComponent } from '../../shared/simple-tiny/simple-tiny.component';
 import { CKEditorModule } from 'ng2-ckeditor';
+import { SharedModule} from '../../SharedModule'
+import { Routes, RouterModule } from '@angular/router';
+
+
+const productRoutes:  Routes=[
+  {path:'',redirectTo:'index',pathMatch:'full'},
+  {path:'index',component:ProductComponent},
+]
 
 @NgModule({
   imports: [
@@ -20,10 +28,11 @@ import { CKEditorModule } from 'ng2-ckeditor';
     CKEditorModule,
     PaginationModule,
     ModalModule,
+    SharedModule,
     Daterangepicker,
     MultiselectDropdownModule
   ],
-   declarations: [ProductComponent,SimpleTinyComponent],
+  declarations: [ProductComponent],
   providers: [DataService, UtilityService, UploadService]
 })
 export class ProductModule { }

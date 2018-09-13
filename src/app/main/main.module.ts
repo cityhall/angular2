@@ -6,7 +6,6 @@ import { RouterModule, Routes } from '@angular/router'
 import { UserModule } from './user/user.module';
 import { HomeModule } from './home/home.module';
 
-
 @NgModule({
   imports: [
     CommonModule,
