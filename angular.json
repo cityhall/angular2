@@ -21,6 +21,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/assetsHome",
               {
                 "glob": "**/*", 
                 "input": "./node_modules/ckeditor/", 
@@ -36,6 +37,8 @@
               "./node_modules/alertifyjs/build/css/themes/default.css",
               "./src/assets/css/custom.css",
               "./node_modules/angular-tree-component/dist/angular-tree-component.css",
+              "./src/assetsHome/css/style.css",
+              "./src/assetsHome/css/mobile.css",
               "src/styles.css"
             ],
             "scripts": [
@@ -46,6 +49,7 @@
               "./node_modules/nprogress/nprogress.js",
               "./node_modules/alertifyjs/build/alertify.js",
               "./node_modules/moment/moment.js",
+              "./src/assets/js/custom.js",
               "./src/assets/js/chris.js"
             ]
           },

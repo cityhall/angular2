@@ -3,6 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
     name: 'SearchPipe',
   })
+
   export class SearchPipe implements PipeTransform {
     public transform(value, keys: string, term: string) {
         if (!term) return value;
