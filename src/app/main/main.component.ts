@@ -3,7 +3,11 @@ import { SystemConstants } from '../core/common/system.constants';
 import { UrlConstants } from '../core/common/url.constants';
 import { UtilityService } from '../core/services/utility.service';
 import { AuthenService } from '../core/services/authen.service';
-import {LoggedInUser} from '../core/domain/loggedin.user';
+import { LoggedInUser} from '../core/domain/loggedin.user';
+import { SignalrService,  } from '../core/services/signalr.service';
+import { DataService, } from '../core/services/data.service';
+
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -11,7 +15,9 @@ import {LoggedInUser} from '../core/domain/loggedin.user';
 })
 export class MainComponent implements OnInit {
   public user :LoggedInUser;
-  constructor(private utilityService: UtilityService,private authenService:AuthenService) { }
+  constructor(private utilityService: UtilityService,private authenService:AuthenService,
+    private DataService:DataService,
+    private SignalrService:SignalrService) { }
 
   ngOnInit() {
     new runjs();

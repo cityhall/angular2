@@ -12,6 +12,7 @@ import { UtilityService } from '../app/core/services/utility.service';
 import { CkeditorConfigService } from '../app/core/services/ckeditor.service';
 import { AuthenService } from '../app/core/services/authen.service';
 import { DataService } from '../app/core/services/data.service';
+import { SignalrService } from '../app/core/services/signalr.service';
 import { NotificationService } from '../app/core/services/notification.service';
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { NotificationService } from '../app/core/services/notification.service';
     PaginationModule.forRoot()
   ],
 
-  providers: [AuthGuard, UtilityService, AuthenService, DataService, NotificationService,CkeditorConfigService],
+  providers: [AuthGuard, UtilityService,SignalrService, AuthenService, DataService, NotificationService,CkeditorConfigService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
