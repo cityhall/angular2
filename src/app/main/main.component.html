@@ -1,223 +1,198 @@
 
-  <div class="fixnav nav-md">
-    <div class="container body">
-      <div class="main_container">
-        <div class="col-md-3 left_col">
-          <div class="left_col scroll-view">
-            <div class="navbar nav_title" style="border: 0;">
-              <a href="/admin/home/index" class="site_title"><i class="fa fa-paw"></i> <span>Gentellela Alela!</span></a>
-            </div>
-    
-            <div class="clearfix"></div>
-    
-            <!-- menu profile quick info -->
-            <div class="profile">
-              <div class="profile_pic">
-                <img src="{{baseFolder+user.avatar}}" alt="..." class="img-circle profile_img">
-              </div>
-              <div class="profile_info">
-                <span>Chào mừng,</span>
-                <h2>{{user.fullName}}</h2>
-              </div>
-            </div>
-            <!-- /menu profile quick info -->
-    
-            <br />
-    
-            <!-- sidebar menu -->
-            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-              <div class="menu_section">
-                <h3>General</h3>
-                <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Trang chủ</a>
-                  </li>
-                  <li><a><i class="fa fa-desktop"></i> Hệ thống <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a routerLink="/admin/role/index" routerLinkActive="active">Nhóm</a></li>
-                      <li><a routerLink="/admin/function/index" routerLinkActive="active">Chức năng</a></li>
-                      <li><a routerLink="/admin/user/index" routerLinkActive="active">Người dùng</a></li>
-                      <li><a routerLink="/admin/activity/index" routerLinkActive="active">Nhật ký</a></li>
-                      <li><a routerLink="/admin/error/index" routerLinkActive="active">Lỗi</a></li>
-                      <li><a routerLink="/admin/setting/index" routerLinkActive="active">Cấu hình</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-chevron-down"></i> Sản phẩm <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a routerLink="/admin/product-category/index" routerLinkActive="active">Danh mục</a></li>
-                      <li><a routerLink="/admin/product/index" routerLinkActive="active">Sản phẩm</a></li>
-                      <li><a routerLink="/admin/order/index" routerLinkActive="active">Hóa đơn</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-table"></i> Nội dung <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a routerLink="/admin/post-category/index">Chuyên mục</a></li>
-                      <li><a routerLink="/admin/post/index">Tin bài</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-clone"></i> Tiện ích <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a routerLink="/admin/footer/index">Chân trang</a></li>
-                      <li><a routerLink="/admin/feedback/index">Phản hồi</a></li>
-                      <li><a routerLink="/admin/annoucement/index">Thông báo</a></li>
-                      <li><a routerLink="/admin/contact/index">Thông tin liên hệ</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-bar-chart-o"></i>Báo cáo <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a routerLink="/admin/report/revenue">Xuất báo cáo doanh thu</a></li>
-                      <li><a routerLink="/admin/visitor/index">Xuất báo cáo truy cập</a></li>
-                      <li><a routerLink="/admin/reader/index">Xuất báo cáo độc giả</a></li>
-    
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-              <div class="menu_section">
-                <h3>Live On</h3>
-                <ul class="nav side-menu">
-                  <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="e_commerce.html">E-commerce</a></li>
-                      <li><a href="projects.html">Projects</a></li>
-                      <li><a href="project_detail.html">Project Detail</a></li>
-                      <li><a href="contacts.html">Contacts</a></li>
-                      <li><a href="profile.html">Profile</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="page_403.html">403 Error</a></li>
-                      <li><a href="page_404.html">404 Error</a></li>
-                      <li><a href="page_500.html">500 Error</a></li>
-                      <li><a href="plain_page.html">Plain Page</a></li>
-                      <li><a href="login.html">Login Page</a></li>
-                      <li><a href="pricing_tables.html">Pricing Tables</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-sitemap"></i> Multilevel Menu <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="#level1_1">Level One</a>
-                        <li><a>Level One<span class="fa fa-chevron-down"></span></a>
-                          <ul class="nav child_menu">
-                            <li class="sub_menu"><a href="level2.html">Level Two</a>
-                            </li>
-                            <li><a href="#level2_1">Level Two</a>
-                            </li>
-                            <li><a href="#level2_2">Level Two</a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li><a href="#level1_2">Level One</a>
-                        </li>
-                    </ul>
-                    </li>
-                    <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
-                </ul>
-              </div>
-    
-            </div>
-            <!-- /sidebar menu -->
-    
-            <!-- /menu footer buttons -->
-            <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" (click)="logout">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-              </a>
-            </div>
-            <!-- /menu footer buttons -->
+     <div class="container-scroller">
+        <!-- partial:partials/_navbar.html -->
+        <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+          <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
+            <a class="navbar-brand brand-logo" href="/admin/home/index">
+              <img src="images/logo.svg" alt="logo" />
+            </a>
+            <a class="navbar-brand brand-logo-mini" href="/admin/home/index">
+              <img src="images/logo-mini.svg" alt="logo" />
+            </a>
           </div>
-        </div>
-    
-        <!-- top navigation -->
-        <div class="top_nav">
-          <div class="nav_menu">
-            <nav class="" role="navigation">
-              <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-              </div>
-        
-              <ul class="nav navbar-nav navbar-right">
-                <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <img [src]="baseFolder + user.avatar" alt="">{{user.fullName}}
-                        <span class=" fa fa-angle-down"></span>
-                      </a>
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Hồ sơ</a></li>
-                    <li>
-                      <a href="javascript:;">
-                            <span class="badge bg-red pull-right">50%</span>
-                            <span>Cài đặt</span>
-                          </a>
-                    </li>
-                    <li><a href="javascript:;">Trợ giúp</a></li>
-                    <li><a href="#" (click)="logout()"><i class="fa fa-sign-out pull-right"></i> Thoát</a></li>
-                  </ul>
-                </li>
-        
-                <li role="presentation" class="dropdown">
-                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-envelope-o"></i>
-                        <span class="badge bg-green" *ngIf="annoucements && annoucements.length>0">{{annoucements.length}}</span>
-                      </a>
-                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                    <li *ngFor="let item of annoucements|orderBy:'CreatedDate':'-'">
-                      <a (click)="markAsRead(item.ID)">
-                        <span class="image"><img [src]="baseFolder + item.AppUser.Avatar" alt="item.AppUser.FullName" /></span>
-                        <span>
-                              <span>{{item.AppUser.FullName}}</span>
-                              <span class="time">{{item.CreatedDate}}</span>
-                        </span>
-                        <span class="message">
-                           {{item.Content}}
-                         
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="text-center">
-                        <a routerLink="/main/my-announcement">
-                              <strong>Xem tất cả thông báo</strong>
-                              <i class="fa fa-angle-right"></i>
-                            </a>
+          <div class="navbar-menu-wrapper d-flex align-items-center">
+            <ul class="navbar-nav navbar-nav-left header-links d-none d-md-flex">
+              <li class="nav-item">
+                <a href="#" class="nav-link">Schedule
+                  <span class="badge badge-primary ml-1">New</span>
+                </a>
+              </li>
+              <li class="nav-item active">
+                <a href="#" class="nav-link">
+                  <i class="mdi mdi-elevation-rise"></i>Reports</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="mdi mdi-bookmark-plus-outline"></i>Score</a>
+              </li>
+            </ul>
+            <ul class="navbar-nav navbar-nav-right">
+           
+              <li class="nav-item dropdown">
+                <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+                  <i class="mdi mdi-bell"></i>
+                  <span class="count">{{annoucements.length}}</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+                  <a class="dropdown-item">
+                    <p class="mb-0 font-weight-normal float-left">Bạn có {{annoucements.length}} thông báo mới
+                    </p>
+                    <span class="badge badge-pill badge-warning float-right">Tất cả</span>
+                  </a>
+                  <div class="dropdown-divider"></div>
+
+                  <a class="dropdown-item preview-item" *ngFor="let item of annoucements|orderBy:'CreatedDate':'-'" (click)="markAsRead(item.ID)">
+                    <div class="preview-thumbnail">
+                      <img [src]="baseFolder + item.AppUser.Avatar" class="profile-pic" alt="item.AppUser.FullName" />
+                    </div>
+                    <div class="preview-item-content flex-grow">
+                      <h6 class="preview-subject ellipsis font-weight-medium text-dark">{{item.AppUser.FullName}}
+                        <span class="float-right font-weight-light small-text">{{item.CreatedDate}}</span>
+                      </h6>
+                      <p class="font-weight-light small-text">
+                        {{item.Content}}
+                      </p>
+                    </div>
+                  </a>
+
+                  <div class="dropdown-divider"></div>
+             
+                </div>
+              </li>
+
+              <li class="nav-item dropdown d-none d-xl-inline-block">
+                <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                  <span class="profile-text">Hello, {{user.fullName}} !</span>
+                  <img class="img-xs rounded-circle" src="{{baseFolder+user.avatar}}" alt="Profile image">
+                </a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+                  <a class="dropdown-item p-0">
+                    <div class="d-flex border-bottom">
+                      <div class="py-3 px-4 d-flex align-items-center justify-content-center">
+                        <i class="mdi mdi-bookmark-plus-outline mr-0 text-gray"></i>
                       </div>
-                    </li>
+                      <div class="py-3 px-4 d-flex align-items-center justify-content-center border-left border-right">
+                        <i class="mdi mdi-account-outline mr-0 text-gray"></i>
+                      </div>
+                      <div class="py-3 px-4 d-flex align-items-center justify-content-center">
+                        <i class="mdi mdi-alarm-check mr-0 text-gray"></i>
+                      </div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item mt-2">
+                   Thông tin tài khoản
+                  </a>
+                  <a class="dropdown-item">
+                   Đổi mật khẩu
+                  </a>
+                  <a class="dropdown-item" (click)="logout">
+                    Đăng xuất
+                  </a>
+                </div>
+              </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+              <span class="mdi mdi-menu"></span>
+            </button>
+          </div>
+        </nav>
+        
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+          <!-- partial:partials/_sidebar.html -->
+          <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+              <li class="nav-item nav-profile">
+                <div class="nav-link">
+                  <div class="user-wrapper">
+                    <div class="profile-image">
+                      <img src="{{baseFolder+user.avatar}}" alt="profile image">
+                    </div>
+                    <div class="text-wrapper">
+                      <p class="profile-name">{{user.fullName}}</p>
+                      <div>
+                        <small class="designation text-muted">Admin</small>
+                        <span class="status-indicator online"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="btn btn-success btn-block">Trang Chủ
+                    <i class="fa fa-home"></i>
+                  </button>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/home/index">
+                  <i class="menu-icon mdi mdi-television"></i>
+                  <span class="menu-title">Trang chính</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                  <i class="menu-icon mdi mdi-content-copy"></i>
+                  <span class="menu-title">Hệ thống</span>
+                  <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-basic">
+                  <ul class="nav flex-column sub-menu">
+                      <li class="nav-item"><a class="nav-link" routerLink="/admin/role/index" routerLinkActive="active">Nhóm</a></li>
+                      <li class="nav-item"><a class="nav-link" routerLink="/admin/function/index" routerLinkActive="active">Chức năng</a></li>
+                      <li class="nav-item"><a class="nav-link" routerLink="/admin/user/index" routerLinkActive="active">Người dùng</a></li>
+                      <li class="nav-item"><a class="nav-link" routerLink="/admin/activity/index" routerLinkActive="active">Nhật ký</a></li>
+                      <li class="nav-item"><a class="nav-link" routerLink="/admin/annoucement/index" routerLinkActive="active">Thông báo</a></li>
+                      <li class="nav-item"><a class="nav-link" routerLink="/admin/setting/index" routerLinkActive="active">Cấu hình</a></li>
                   </ul>
+                </div>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" data-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic2">
+                    <i class="menu-icon mdi mdi-content-copy"></i>
+                    <span class="menu-title">Sản phẩm</span>
+                    <i class="menu-arrow"></i>
+                  </a>
+                  <div class="collapse" id="ui-basic2">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"><a class="nav-link" routerLink="/admin/product-category/index" routerLinkActive="active">Danh mục</a></li>
+                        <li class="nav-item"><a class="nav-link" routerLink="/admin/product/index" routerLinkActive="active">Sản phẩm</a></li>
+                        <li class="nav-item"><a class="nav-link" routerLink="/admin/order/index" routerLinkActive="active">hóa đơn</a></li>
+                    </ul>
+                  </div>
                 </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-        <!-- /top navigation -->
-    
-        <!-- page content -->
-        <div class="right_col" role="main">
-          <div class="">
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#ui-basic3" aria-expanded="false" aria-controls="ui-basic3">
+                      <i class="menu-icon mdi mdi-content-copy"></i>
+                      <span class="menu-title">Báo cáo</span>
+                      <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic3">
+                      <ul class="nav flex-column sub-menu">
+                          <li class="nav-item"><a class="nav-link" routerLink="/admin/report/revenue" routerLinkActive="active">Báo cáo doanh thu</a></li>
+                      </ul>
+                    </div>
+                  </li>
+
+            </ul>
+          </nav>
+          <!-- partial -->
+          <div class="main-panel">
+           <div>
             <router-outlet></router-outlet>
+           </div>
+            <!-- content-wrapper ends -->
+            <!-- partial:partials/_footer.html -->
+            <footer class="footer">
+              <div class="container-fluid clearfix">
+                <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © 2018
+                  <a href="http://www.bootstrapdash.com/" target="_blank">Bootstrapdash</a>. All rights reserved.</span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with
+                  <i class="mdi mdi-heart text-danger"></i>
+                </span>
+              </div>
+            </footer>
+            <!-- partial -->
           </div>
+          <!-- main-panel ends -->
         </div>
-        <!-- /page content -->
-    
-        <!-- footer content -->
-        <footer>
-          <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
+        <!-- page-body-wrapper ends -->
       </div>
-    </div>
-      
-      </div>
-  
- 
