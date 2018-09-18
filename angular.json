@@ -39,7 +39,7 @@
               "./node_modules/angular-tree-component/dist/angular-tree-component.css",
               "./src/assetsHome/css/style.css",
               "./src/assetsHome/css/mobile.css",
-              "src/styles.css"
+              "./src/styles.css"
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
@@ -49,6 +49,7 @@
               "./node_modules/nprogress/nprogress.js",
               "./node_modules/alertifyjs/build/alertify.js",
               "./node_modules/moment/moment.js",
+              "./node_modules/chart.js/dist/chart.js",
               "./src/assets/js/custom.js",
               "./src/assets/js/chris.js"
             ]

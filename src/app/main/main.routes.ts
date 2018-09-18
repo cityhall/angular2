@@ -12,6 +12,7 @@ export const mainRoutes: Routes = [
             { path: 'product', loadChildren: './product/product.module#ProductModule' },
             { path: 'order', loadChildren: './order/order.module#OrderModule' },
             { path: 'annoucement', loadChildren: './annoucement/annoucement.module#AnnoucementModule' },
+            { path: 'report', loadChildren: './report/report.module#ReportModule' },
 
         ]
     }

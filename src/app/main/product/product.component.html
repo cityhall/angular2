@@ -292,7 +292,7 @@
           <div class="form-group row">
             <div class="col-xs-3">
               <label>Chọn ảnh</label>
-              <input type="file" required #imagePath name="imagePath" ng2FileSelect [uploader]="moreImage"  class="form-control">
+              <input type="file" required #imagePath name="imagePath" ng2FileSelect [uploader]="moreImage" id="load-file" class="form-control">
               <p class="help-block label label-danger"> chỉ hỗ trợ định dạng *.png, *.jpg, *.jpeg </p>
               <input type="hidden" [(ngModel)]="imageEntity.Path" name="imagePath" />
               <input type="hidden" [(ngModel)]="imageEntity.ProductId" name="productId" />

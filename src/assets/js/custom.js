@@ -71,8 +71,10 @@ function newFunction() {
 					});
 
 					$('.child_menu').on('click', function() {
-						$(this).parent().removeClass('active');
-						$(this).css('display','none')
+						if($(window).width()<769 ){
+							$(this).parent().removeClass('active');
+							$(this).css('display','none')
+						}
 					})
 			
 					// check active menu
