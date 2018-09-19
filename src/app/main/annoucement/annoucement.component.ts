@@ -33,10 +33,12 @@ export class AnnoucementComponent implements OnInit {
   }
   //Load data
   public search() {
+    $('.preloader').show();
     this._dataService.get('/api/announcement/getall?pageIndex='
       + this.pageIndex + '&pageSize='
       + this.pageSize)
       .subscribe((response: any) => {
+        $('.preloader').hide();
         this.announcements = response.Items;
         this.pageIndex = response.PageIndex;
       }, error => this._dataService.handleError(error));
@@ -53,6 +55,7 @@ export class AnnoucementComponent implements OnInit {
   }
   //Action delete
   public deleteConfirm(id: string): void {
+    $('.preloader').show();
     this._dataService.delete('/api/announcement/delete', 'id', id).subscribe((response: any) => {
       this.notificationService.printSuccessMessage(MessageConstants.DELETE_OK_MSG);
       this.search();
@@ -64,6 +67,7 @@ export class AnnoucementComponent implements OnInit {
   }
   //Save change for modal popup
   public saveChanges(valid: boolean) {
+    $('.preloader').show();
     if (valid) {
       this._dataService.post('/api/announcement/add', JSON.stringify(this.entity)).subscribe((response: any) => {
         this.search();

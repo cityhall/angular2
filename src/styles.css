@@ -12,3 +12,22 @@
 .fixselect .input-group-prepend span i{
     display: none !important;
 }
+
+.pagination{
+    padding-top: 10px;
+    float: right;
+}    
+.modal-header .close {
+    font-size: 20px;
+    margin-right: -10px;
+    margin-top: -13px;
+}
+.preloader {
+    background: #ffffff8c;
+}
+.page-wrapper{
+    min-height: 800px;
+}
+textarea {
+    resize: auto;
+}

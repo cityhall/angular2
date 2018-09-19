@@ -1,54 +1,33 @@
-
-<div class="container-scroller">
-    <div class="container-fluid page-body-wrapper full-page-wrapper auth-page">
-      <div class="content-wrapper d-flex align-items-center auth auth-bg-1 theme-one">
-        <div class="row w-100">
-          <div class="col-lg-4 mx-auto">
-            <div class="auto-form-wrapper">
-              <form  (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+<div id="main-wrapper">
+  <div class="unix-login">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-lg-4">
+          <div class="login-content card">
+            <div class="login-form">
+              <h4>Đăng Nhập[GDO]</h4>
+              <form (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
                 <div class="form-group" [ngClass]="{'has-danger':f.submitted && !username.valid}">
-                  <label class="label">Tài khoản</label>
-                  <div class="input-group" >
-                     
-                          <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" required placeholder="Tài khoản">
-                    
-                    <div class="input-group-append">
-                      <span class="input-group-text">
-                        <i class="mdi mdi-check-circle-outline"></i>
-                      </span>
-                    </div>
-                  </div>
+                  <label>Tài Khoản</label>
+                  <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel"
+                    required placeholder="Tài khoản">
                   <div *ngIf="f.submitted && !username.valid" class="form-control-feedback">Yêu cầu nhập tên đăng nhập!</div>
-
                 </div>
+
                 <div class="form-group" [ngClass]="{'has-danger':f.submitted && !password.valid}">
-                  <label class="label">Mật khẩu</label>
-                  <div class="input-group" >
-                          <input type="password" class="form-control" placeholder="*********" name="password" [(ngModel)]="model.password" #password="ngModel" required  />
-                    <div class="input-group-append">
-                      <span class="input-group-text">
-                        <i class="mdi mdi-check-circle-outline"></i>
-                      </span>
-                    </div>
-                  </div>
+                  <label>Mật Khẩu</label>
+                  <input type="password" class="form-control" placeholder="*********" name="password" [(ngModel)]="model.password"
+                    #password="ngModel" required>
                   <div *ngIf="f.submitted && !password.valid" class="form-control-feedback">Yêu cầu nhập mật khẩu!</div>
-
                 </div>
-                <div class="form-group">
-                    <div style="display: inline-flex;width: 100%;">
-                        <button [disabled]="loading" class="btn btn-primary submit-btn btn-block" style="width: 50%;margin:auto">Đăng nhập</button>
-                        <img *ngIf="loading" style="margin: auto;" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
-                   </div>
-                </div>
-              
+                <button type="submit" [disabled]="loading" class="btn btn-primary btn-flat m-b-30 m-t-30">Đăng Nhập</button>
+                <img *ngIf="loading" style="position: absolute;bottom: 85px;right: 145px;" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
               </form>
             </div>
-            
-            <p class="footer-text text-center">copyright © 2018 GDO. All rights reserved.</p>
           </div>
         </div>
       </div>
-      <!-- content-wrapper ends -->
     </div>
-    <!-- page-body-wrapper ends -->
   </div>
+
+</div>

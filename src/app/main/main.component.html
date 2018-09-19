@@ -1,198 +1,148 @@
 
-     <div class="container-scroller">
-        <!-- partial:partials/_navbar.html -->
-        <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-          <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
-            <a class="navbar-brand brand-logo" href="/admin/home/index">
-              <img src="images/logo.svg" alt="logo" />
-            </a>
-            <a class="navbar-brand brand-logo-mini" href="/admin/home/index">
-              <img src="images/logo-mini.svg" alt="logo" />
-            </a>
-          </div>
-          <div class="navbar-menu-wrapper d-flex align-items-center">
-            <ul class="navbar-nav navbar-nav-left header-links d-none d-md-flex">
-              <li class="nav-item">
-                <a href="#" class="nav-link">Schedule
-                  <span class="badge badge-primary ml-1">New</span>
-                </a>
-              </li>
-              <li class="nav-item active">
-                <a href="#" class="nav-link">
-                  <i class="mdi mdi-elevation-rise"></i>Reports</a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="mdi mdi-bookmark-plus-outline"></i>Score</a>
-              </li>
-            </ul>
-            <ul class="navbar-nav navbar-nav-right">
-           
-              <li class="nav-item dropdown">
-                <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
-                  <i class="mdi mdi-bell"></i>
-                  <span class="count">{{annoucements.length}}</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-                  <a class="dropdown-item">
-                    <p class="mb-0 font-weight-normal float-left">Bạn có {{annoucements.length}} thông báo mới
-                    </p>
-                    <span class="badge badge-pill badge-warning float-right">Tất cả</span>
-                  </a>
-                  <div class="dropdown-divider"></div>
-
-                  <a class="dropdown-item preview-item" *ngFor="let item of annoucements|orderBy:'CreatedDate':'-'" (click)="markAsRead(item.ID)">
-                    <div class="preview-thumbnail">
-                      <img [src]="baseFolder + item.AppUser.Avatar" class="profile-pic" alt="item.AppUser.FullName" />
-                    </div>
-                    <div class="preview-item-content flex-grow">
-                      <h6 class="preview-subject ellipsis font-weight-medium text-dark">{{item.AppUser.FullName}}
-                        <span class="float-right font-weight-light small-text">{{item.CreatedDate}}</span>
-                      </h6>
-                      <p class="font-weight-light small-text">
-                        {{item.Content}}
-                      </p>
-                    </div>
-                  </a>
-
-                  <div class="dropdown-divider"></div>
-             
-                </div>
-              </li>
-
-              <li class="nav-item dropdown d-none d-xl-inline-block">
-                <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                  <span class="profile-text">Hello, {{user.fullName}} !</span>
-                  <img class="img-xs rounded-circle" src="{{baseFolder+user.avatar}}" alt="Profile image">
-                </a>
-                <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
-                  <a class="dropdown-item p-0">
-                    <div class="d-flex border-bottom">
-                      <div class="py-3 px-4 d-flex align-items-center justify-content-center">
-                        <i class="mdi mdi-bookmark-plus-outline mr-0 text-gray"></i>
-                      </div>
-                      <div class="py-3 px-4 d-flex align-items-center justify-content-center border-left border-right">
-                        <i class="mdi mdi-account-outline mr-0 text-gray"></i>
-                      </div>
-                      <div class="py-3 px-4 d-flex align-items-center justify-content-center">
-                        <i class="mdi mdi-alarm-check mr-0 text-gray"></i>
-                      </div>
-                    </div>
-                  </a>
-                  <a class="dropdown-item mt-2">
-                   Thông tin tài khoản
-                  </a>
-                  <a class="dropdown-item">
-                   Đổi mật khẩu
-                  </a>
-                  <a class="dropdown-item" (click)="logout">
-                    Đăng xuất
-                  </a>
-                </div>
-              </li>
-            </ul>
-            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-              <span class="mdi mdi-menu"></span>
-            </button>
-          </div>
-        </nav>
-        
-        <!-- partial -->
-        <div class="container-fluid page-body-wrapper">
-          <!-- partial:partials/_sidebar.html -->
-          <nav class="sidebar sidebar-offcanvas" id="sidebar">
-            <ul class="nav">
-              <li class="nav-item nav-profile">
-                <div class="nav-link">
-                  <div class="user-wrapper">
-                    <div class="profile-image">
-                      <img src="{{baseFolder+user.avatar}}" alt="profile image">
-                    </div>
-                    <div class="text-wrapper">
-                      <p class="profile-name">{{user.fullName}}</p>
-                      <div>
-                        <small class="designation text-muted">Admin</small>
-                        <span class="status-indicator online"></span>
-                      </div>
-                    </div>
-                  </div>
-                  <button class="btn btn-success btn-block">Trang Chủ
-                    <i class="fa fa-home"></i>
-                  </button>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/admin/home/index">
-                  <i class="menu-icon mdi mdi-television"></i>
-                  <span class="menu-title">Trang chính</span>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                  <i class="menu-icon mdi mdi-content-copy"></i>
-                  <span class="menu-title">Hệ thống</span>
-                  <i class="menu-arrow"></i>
-                </a>
-                <div class="collapse" id="ui-basic">
-                  <ul class="nav flex-column sub-menu">
-                      <li class="nav-item"><a class="nav-link" routerLink="/admin/role/index" routerLinkActive="active">Nhóm</a></li>
-                      <li class="nav-item"><a class="nav-link" routerLink="/admin/function/index" routerLinkActive="active">Chức năng</a></li>
-                      <li class="nav-item"><a class="nav-link" routerLink="/admin/user/index" routerLinkActive="active">Người dùng</a></li>
-                      <li class="nav-item"><a class="nav-link" routerLink="/admin/activity/index" routerLinkActive="active">Nhật ký</a></li>
-                      <li class="nav-item"><a class="nav-link" routerLink="/admin/annoucement/index" routerLinkActive="active">Thông báo</a></li>
-                      <li class="nav-item"><a class="nav-link" routerLink="/admin/setting/index" routerLinkActive="active">Cấu hình</a></li>
-                  </ul>
-                </div>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" data-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic2">
-                    <i class="menu-icon mdi mdi-content-copy"></i>
-                    <span class="menu-title">Sản phẩm</span>
-                    <i class="menu-arrow"></i>
-                  </a>
-                  <div class="collapse" id="ui-basic2">
-                    <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"><a class="nav-link" routerLink="/admin/product-category/index" routerLinkActive="active">Danh mục</a></li>
-                        <li class="nav-item"><a class="nav-link" routerLink="/admin/product/index" routerLinkActive="active">Sản phẩm</a></li>
-                        <li class="nav-item"><a class="nav-link" routerLink="/admin/order/index" routerLinkActive="active">hóa đơn</a></li>
-                    </ul>
-                  </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#ui-basic3" aria-expanded="false" aria-controls="ui-basic3">
-                      <i class="menu-icon mdi mdi-content-copy"></i>
-                      <span class="menu-title">Báo cáo</span>
-                      <i class="menu-arrow"></i>
-                    </a>
-                    <div class="collapse" id="ui-basic3">
-                      <ul class="nav flex-column sub-menu">
-                          <li class="nav-item"><a class="nav-link" routerLink="/admin/report/revenue" routerLinkActive="active">Báo cáo doanh thu</a></li>
-                      </ul>
+<div class="fix-header fix-sidebar">
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+			<circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
+    </div>
+<!-- Main wrapper  -->
+<div id="main-wrapper">
+    <!-- header header  -->
+    <div class="header is_stuck">
+      <nav class="navbar top-navbar navbar-expand-md navbar-light">
+        <!-- Logo -->
+        <div class="navbar-header">
+          <a class="navbar-brand" href="admin/home/index">
+            <!-- Logo icon -->
+            <b><img src="./../../assets/ElaAdmin/images/logo.png" alt="homepage" class="dark-logo" /></b>
+            <!--End Logo icon -->
+            <!-- Logo text -->
+            <span><img src="./../../assets/ElaAdmin/images/logo-text.png" alt="homepage" class="dark-logo" /></span>
+          </a>
+        </div>
+        <!-- End Logo -->
+        <div class="navbar-collapse">
+          <!-- toggle and nav items -->
+          <ul class="navbar-nav mr-auto mt-md-0">
+            <!-- This is  -->
+            <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted  " href="javascript:void(0)"><i
+                  class="mdi mdi-menu"></i></a> </li>
+            <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted  " href="javascript:void(0)"><i
+                  class="ti-menu"></i></a> </li>
+  
+          </ul>
+          <!-- User profile and search -->
+          <ul class="navbar-nav my-lg-0">
+  
+            <!-- Search -->
+            <li class="nav-item hidden-sm-down search-box"> <a class="nav-link hidden-sm-down text-muted  " href="javascript:void(0)"><i
+                  class="ti-search"></i></a>
+              <form class="app-search">
+                <input type="text" class="form-control" placeholder="Search here"> <a class="srh-btn"><i class="ti-close"></i></a>
+              </form>
+            </li>
+  
+            <!-- Messages -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-muted " href="#" id="2" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false"> <i class="fa fa-envelope"></i>
+                <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn" aria-labelledby="2">
+                <ul>
+                  <li>
+                    <div class="drop-title">Bạn có {{annoucements.length}} thông báo mới</div>
+                  </li>
+                  <li>
+                    <div class="message-center">
+                      <!-- Message -->
+                      <a href="#" *ngFor="let item of annoucements|orderBy:'CreatedDate':'-'" (click)="markAsRead(item.ID)">
+                        <div class="user-img"> <img [src]="baseFolder + item.AppUser.Avatar" alt="user" class="img-circle">
+                          <span class="profile-status online pull-right"></span>
+                        </div>
+                        <div class="mail-contnet">
+                          <h5>{{item.AppUser.FullName}}</h5> <span class="mail-desc">{{item.Content}}</span> <span class="time">{{item.CreatedDate}}</span>
+                        </div>
+                      </a>
                     </div>
                   </li>
-
-            </ul>
-          </nav>
-          <!-- partial -->
-          <div class="main-panel">
-           <div>
-            <router-outlet></router-outlet>
-           </div>
-            <!-- content-wrapper ends -->
-            <!-- partial:partials/_footer.html -->
-            <footer class="footer">
-              <div class="container-fluid clearfix">
-                <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © 2018
-                  <a href="http://www.bootstrapdash.com/" target="_blank">Bootstrapdash</a>. All rights reserved.</span>
-                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with
-                  <i class="mdi mdi-heart text-danger"></i>
-                </span>
+                  <li>
+                    <a class="nav-link text-center" href="javascript:void(0);"> <strong>Xem tất cả</strong> <i class="fa fa-angle-right"></i>
+                    </a>
+                  </li>
+                </ul>
               </div>
-            </footer>
-            <!-- partial -->
-          </div>
-          <!-- main-panel ends -->
+            </li>
+            <!-- End Messages -->
+            <!-- Profile -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false"><img src="{{baseFolder+user.avatar}}" alt="user" class="profile-pic" /></a>
+              <div class="dropdown-menu dropdown-menu-right animated zoomIn">
+                <ul class="dropdown-user">
+                  <li><a href="javascript:void(0)"><i class="ti-user"></i> Thông tin tài khoản</a></li>
+                  <li><a href="javascript:void(0)"><i class="ti-settings"></i> Đổi mật khẩu</a></li>
+                  <li><a href="javascript:void(0)"><i class="fa fa-power-off" (click)="logout"></i> Logout</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
         </div>
-        <!-- page-body-wrapper ends -->
+      </nav>
+    </div>
+    <!-- End header header -->
+    <!-- Left Sidebar  -->
+    <div class="left-sidebar">
+      <!-- Sidebar scroll-->
+      <div class="scroll-sidebar">
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav">
+          <ul id="sidebarnav">
+            <li class="nav-devider"></li>
+  
+            <li class="nav-label">Danh Mục</li>
+            <li> <a class="has-arrow" href="javascript:void(0);" aria-expanded="false"><i class="fa fa-cog"></i><span class="hide-menu">Hệ
+                  thống</span></a>
+              <ul aria-expanded="false" class="collapse">
+                <li><a routerLink="/admin/role/index" routerLinkActive="active">Nhóm</a></li>
+                <li><a routerLink="/admin/function/index" routerLinkActive="active">Chức năng</a></li>
+                <li><a routerLink="/admin/user/index" routerLinkActive="active">Người dùng</a></li>
+                <li><a routerLink="/admin/activity/index" routerLinkActive="active">Nhật ký</a></li>
+                <li><a routerLink="/admin/annoucement/index">Thông báo</a></li>
+                <li><a routerLink="/admin/setting/index" routerLinkActive="active">Cấu hình</a></li>
+              </ul>
+            </li>
+            <li> <a class="has-arrow" href="javascript:void(0);" aria-expanded="false"><i class="fa fa-product-hunt "></i><span class="hide-menu">Sản
+                  phẩm</span></a>
+              <ul aria-expanded="false" class="collapse">
+                <li><a routerLink="/admin/product-category/index" routerLinkActive="active">Danh mục</a></li>
+                <li><a routerLink="/admin/product/index" routerLinkActive="active">Sản phẩm</a></li>
+                <li><a routerLink="/admin/order/index" routerLinkActive="active">Hóa đơn</a></li>
+              </ul>
+            </li>
+            <li> <a class="has-arrow" href="javascript:void(0);" aria-expanded="false"><i class="fa fa-flag"></i><span class="hide-menu">Báo
+                  cáo</span></a>
+              <ul aria-expanded="false" class="collapse">
+                <li><a routerLink="/admin/report/revenue">Xuất báo cáo doanh thu</a></li>
+                <li><a routerLink="/admin/visitor/index">Xuất báo cáo truy cập</a></li>
+                <li><a routerLink="/admin/reader/index">Xuất báo cáo độc giả</a></li>
+              </ul>
+            </li>
+  
+          </ul>
+        </nav>
+        <!-- End Sidebar navigation -->
       </div>
+      <!-- End Sidebar scroll-->
+    </div>
+    <!-- End Left Sidebar  -->
+    <!-- Page wrapper  -->
+    <div class="page-wrapper">
+      <router-outlet></router-outlet>
+  
+      <!-- footer -->
+      <footer class="footer"> © GDO 2018 All rights reserved. Template designed by <a href="https://colorlib.com">Colorlib</a></footer>
+      <!-- End footer -->
+    </div>
+    <!-- End Page wrapper  -->
+  </div>
+</div>

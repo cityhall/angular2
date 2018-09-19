@@ -59,8 +59,10 @@ export class FunctionComponent implements OnInit {
   }
   //Load data
   public search() {
+    $('.preloader').show();
     this._dataService.get('/api/function/getall?filter=' + this.filter)
       .subscribe((response: any[]) => {
+        $('.preloader').hide();
         this._functions = response.filter(x => x.ParentId == null);
         this._functionHierachy = this.utilityService.Unflatten(response);
       }, error => this._dataService.handleError(error));
@@ -98,6 +100,7 @@ export class FunctionComponent implements OnInit {
 
   //Action delete
   public deleteConfirm(id: string): void {
+    $('.preloader').show();
     this._dataService.delete('/api/function/delete', 'id', id).subscribe((response: any) => {
       this.notificationService.printSuccessMessage(MessageConstants.DELETE_OK_MSG);
       this.search();

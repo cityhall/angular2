@@ -54,13 +54,16 @@ export class UserComponent implements OnInit {
     private _notificationService: NotificationService) { }
 
   ngOnInit() {
+  
     this.loadData();
     this.loadRoles();
     this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
   }
   loadData() {
+    $('.preloader').show();
     this._dataService.get('/api/appUser/getlistpaging?page=' + this.pageIndex + '&pageSize=' + this.pageSize + '&filter=' + this.filter)
       .subscribe((response: any) => {
+        $('.preloader').hide();
         this.users = response.Items;
         this.pageIndex = response.PageIndex;
         this.pageSize = response.PageSize;
@@ -68,9 +71,11 @@ export class UserComponent implements OnInit {
       });
   }
   loadDetai(id: any) {
+    $('.preloader').show();
     this.myRoles = [];
     this._dataService.get('/api/appUser/detail/' + id).subscribe
       ((res: any) => {
+        $('.preloader').hide();
         this.entity = res;
         for (let role of this.entity.Roles) {
           this.myRoles.push(role)
@@ -79,9 +84,7 @@ export class UserComponent implements OnInit {
         
       })
   }
-  loadAvata(){
-      var fileName = $(".av").val();
-  }
+
   loadRoles() {
     this._dataService.get('/api/appRole/getlistall/').subscribe
       ((res: any[]) => {
@@ -107,7 +110,7 @@ export class UserComponent implements OnInit {
   }
  
   saveChange(form: NgForm) {
-   
+    $('.preloader').show();
     if (form.valid) {
       let fi = this.avatar.nativeElement;
       this.entity.Roles = this.myRoles;
@@ -135,6 +138,7 @@ export class UserComponent implements OnInit {
       this._dataService.post('/api/appUser/add', JSON.stringify(this.entity))
         .subscribe((res: any) => {
           this.loadData();
+          $('.preloader').hide();
           this.modalAddEdit.hide();
           this._notificationService.printSuccessMessage(MessageConstants.CREATED_OK_MSG);
         });
@@ -145,6 +149,7 @@ export class UserComponent implements OnInit {
         .subscribe((res: any) => {
           this.loadData();
           this.modalAddEdit.hide();
+          $('.preloader').hide();
           this._notificationService.printSuccessMessage(MessageConstants.UPDATED_OK_MSG);
         });
     }
@@ -154,6 +159,7 @@ export class UserComponent implements OnInit {
     this._notificationService.printConfirmationDialog(MessageConstants.CONFIRM_DELETE_MSG, () => this.deteleItemConfirm(id))
   }
   deteleItemConfirm(id: any) {
+    $('.preloader').show();
     this._dataService.delete('/api/appUser/delete', 'id', id).subscribe((response: Response) => {
       this._notificationService.printSuccessMessage(MessageConstants.DELETE_OK_MSG);
       this.loadData();

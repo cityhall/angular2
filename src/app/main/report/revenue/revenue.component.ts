@@ -50,6 +50,7 @@ export class RevenueComponent implements OnInit {
     });
   }
   loadRevenues() {
+    $('.preloader').show();
     this._dataService.get('/api/statistic/getrevenue?fromDate=' + this.fromDate + '&toDate=' + this.toDate)
       .subscribe((response: any[]) => {
         this.barChartLabels = [];
@@ -67,7 +68,7 @@ export class RevenueComponent implements OnInit {
         }
         this.barChartData.push(revenue);
         this.barChartData.push(benefit);
-        console.log(this.barChartData);
+        $('.preloader').hide();
         this.refreshChart();
       });
 

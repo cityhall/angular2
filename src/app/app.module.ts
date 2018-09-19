@@ -14,6 +14,7 @@ import { AuthenService } from '../app/core/services/authen.service';
 import { DataService } from '../app/core/services/data.service';
 import { SignalrService } from '../app/core/services/signalr.service';
 import { NotificationService } from '../app/core/services/notification.service';
+
 @NgModule({
   declarations: [
     AppComponent,

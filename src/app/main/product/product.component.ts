@@ -66,10 +66,11 @@ export class ProductComponent implements OnInit {
     this.entity.Alias = this.utilityService.MakeSeoTitle(this.entity.Name);
   }
   public search() {
+    $('.preloader').show();
     this._dataService.get('/api/product/getall?page=' + this.pageIndex + '&pageSize=' + this.pageSize + '&keyword=' + this.filter + '&categoryId=' + this.filterCategoryID)
       .subscribe((response: any) => {
         this.products = response.Items;
-        console.log(this.products)
+        $('.preloader').hide();
         this.pageIndex = response.PageIndex;
       }, error => this._dataService.handleError(error));
   }
@@ -92,6 +93,7 @@ export class ProductComponent implements OnInit {
   }
 
   public delete(id: string) {
+    $('.preloader').show();
     this.notificationService.printConfirmationDialog(MessageConstants.CONFIRM_DELETE_MSG, () => {
       this._dataService.delete('/api/product/delete', 'id', id).subscribe((response: any) => {
         this.notificationService.printSuccessMessage(MessageConstants.DELETE_OK_MSG);
@@ -107,6 +109,7 @@ export class ProductComponent implements OnInit {
   }
   //Save change for modal popup
   public saveChanges(valid: boolean) {
+    $('.preloader').show();
     if (valid) {
       let fi = this.thumbnailImage.nativeElement;
       if (fi.files.length > 0) {
@@ -128,6 +131,7 @@ export class ProductComponent implements OnInit {
   }
   private saveData() {
     if (this.entity.ID == undefined) {
+      this.entity.Content = $('#summernote').summernote('code');
       this._dataService.post('/api/product/add', JSON.stringify(this.entity)).subscribe((response: any) => {
         this.search();
         this.addEditModal.hide();
@@ -135,6 +139,8 @@ export class ProductComponent implements OnInit {
       });
     }
     else {
+      this.entity.Content = $('#summernote').summernote('code');
+      debugger
       this._dataService.put('/api/product/update', JSON.stringify(this.entity)).subscribe((response: any) => {
         this.search();
         this.addEditModal.hide();
@@ -173,11 +179,14 @@ export class ProductComponent implements OnInit {
 }
 
  public loadProductImages(id: number) {
+  $('.preloader').show();
   this._dataService.get('/api/productImage/getall?productId=' + id).subscribe((response: any[]) => {
     this.productImages = response;
+    $('.preloader').hide();
   }, error => this._dataService.handleError(error));
 }
 public deleteImage(id: number) {
+  $('.preloader').show();
   this.notificationService.printConfirmationDialog(MessageConstants.CONFIRM_DELETE_MSG, () => {
     this._dataService.delete('/api/productImage/delete', 'id', id.toString()).subscribe((response: any) => {
       this.notificationService.printSuccessMessage(MessageConstants.DELETE_OK_MSG);
@@ -187,6 +196,7 @@ public deleteImage(id: number) {
 }
 
 public saveProductImage(isValid: boolean) {
+  $('.preloader').show();
   if (isValid) {
     let fi = this.imagePath.nativeElement;
     if (fi.files.length > 0) {
@@ -227,12 +237,15 @@ public loadSizes() {
 }
 
 public loadProductQuantities(id: number) {
+  $('.preloader').show();
   this._dataService.get('/api/productQuantity/getall?productId=' + id + '&sizeId=' + this.sizeId + '&colorId=' + this.colorId).subscribe((response: any[]) => {
     this.productQuantities = response;
+    $('.preloader').hide();
   }, error => this._dataService.handleError(error));
 }
 
 public saveProductQuantity(isValid: boolean) {
+  $('.preloader').show();
   if (isValid) {
     this._dataService.post('/api/productQuantity/add', JSON.stringify(this.quantityEntity)).subscribe((response: any) => {
       this.loadProductQuantities(this.quantityEntity.ProductId);
@@ -245,6 +258,7 @@ public saveProductQuantity(isValid: boolean) {
 }
 
  public deleteQuantity(productId: number, colorId: string, sizeId: string) {
+  $('.preloader').show();
   var parameters = { "productId": productId, "sizeId": sizeId, "colorId": colorId };
   this.notificationService.printConfirmationDialog(MessageConstants.CONFIRM_DELETE_MSG, () => {
     this._dataService.deleteWithMultiParams('/api/productQuantity/delete', parameters).subscribe((response: any) => {
