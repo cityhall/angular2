@@ -66,19 +66,15 @@
                   <td>{{item.CreatedBy}}</td>
                   <td>
                     <button class="btn btn-warning m-l-5" data-toggle="tooltip" data-placement="top" title="Quản lý ảnh"
-                      *ngIf="_authenService.hasPermission('PRODUCT','update')" (click)="showImageManage(item.ID)"> <i
-                        class="fa fa-file-image-o" aria-hidden="true"></i></button>
+                      (click)="showImageManage(item.ID)"> <i class="fa fa-file-image-o" aria-hidden="true"></i></button>
 
                     <button class="btn btn-warning m-l-5" data-toggle="tooltip" data-placement="top" title="Quản lý số lượng"
-                      *ngIf="_authenService.hasPermission('PRODUCT','update')" (click)="showQuantityManage(item.ID)"><i
-                        class="fa fa-bandcamp" aria-hidden="true"></i></button>
+                      (click)="showQuantityManage(item.ID)"><i class="fa fa-bandcamp" aria-hidden="true"></i></button>
 
                     <button class="btn btn-primary m-l-5" data-toggle="tooltip" data-placement="top" title="Cập nhật sản phẩm"
-                      *ngIf="_authenService.hasPermission('PRODUCT','update')" (click)="showEdit(item.ID)"> <i class="fa fa-pencil-square-o"
-                        aria-hidden="true"></i></button>
+                      (click)="showEdit(item.ID)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                     <button class="btn btn-danger m-l-5" data-toggle="tooltip" data-placement="top" title="Xóa sản phẩm"
-                      *ngIf="_authenService.hasPermission('PRODUCT','delete')" (click)="delete(item.ID)"><i class="fa fa-trash"
-                        aria-hidden="true"></i></button>
+                      (click)="delete(item.ID)"><i class="fa fa-trash" aria-hidden="true"></i></button>
                   </td>
                 </tr>
 
@@ -114,42 +110,37 @@
         <form class="form-horizontal form-label-left input_mask" novalidate #addEditForm="ngForm" (ngSubmit)="saveChanges(addEditForm.valid)"
           *ngIf="entity">
           <ul class="nav nav-tabs">
-            <li  class="nav-item active"><a data-toggle="tab" role="tab" class="nav-link active" href="#basic">Thông tin cơ bản</a></li>
-            <li  class="nav-item"><a data-toggle="tab"  role="tab" class="nav-link" href="#more-info">Thông tin thêm</a></li>
+            <li class="nav-item active"><a data-toggle="tab" role="tab" class="nav-link active" href="#basic">Thông tin
+                cơ bản</a></li>
+            <li class="nav-item"><a data-toggle="tab" role="tab" class="nav-link" href="#more-info">Thông tin thêm</a></li>
           </ul>
           <div class="tab-content">
             <div id="basic" role="tabpanel" class="tab-pane in active">
-           
-              <div class="form-group row m-b-10 m-l-5 m-r-5">
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                    <label >Tên</label>
-                  <input type="hidden" [(ngModel)]="entity.ID" name="id" />
-                  <input type="text" #name="ngModel" (keypress)="createAlias()" [(ngModel)]="entity.Name" required
-                    minlength="3" name="name" class="form-control" />
-                  <small [hidden]="name.valid || (name.pristine && !addEditForm.submitted)" class="text-danger">
-                    Bạn phải nhập tên ít nhất 3 ký tự
-                  </small>
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                    <label >Alias</label>
-                  <input type="text" #alias="ngModel" [(ngModel)]="entity.Alias" required minlength="3" name="alias"
-                    class="form-control" />
-                  <small [hidden]="alias.valid || (alias.pristine && !addEditForm.submitted)" class="text-danger">
-                    Bạn phải nhập alias
-                  </small>
-                </div>
-               
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <label>Hình ảnh</label>
-                  <input type="file" #thumbnailImage name="photo" ng2FileSelect [uploader]="uploader" class="form-control">
-                  <p class="help-block label label-danger"> chỉ hỗ trợ định dạng *.png, *.jpg, *.jpeg </p>
-                  <input type="hidden" [(ngModel)]="entity.ThumbnailImage" name="thumbnailImage" />
-                </div>
-                <div class="col-md-6 col-sm-6 col-xs-12" *ngIf="entity.ThumbnailImage">
-                    <img [src]="baseFolder + entity.ThumbnailImage" width="128" />
+
+              <div class="form-group">
+
+                <div class="row m-b-10 m-l-5 m-r-5">
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+                    <label>Tên</label>
+                    <input type="hidden" [(ngModel)]="entity.ID" name="id" />
+                    <input type="text" #name="ngModel" (keypress)="createAlias()" [(ngModel)]="entity.Name" required
+                      minlength="3" name="name" class="form-control" />
+                    <small [hidden]="name.valid || (name.pristine && !addEditForm.submitted)" class="text-danger">
+                      Bạn phải nhập tên ít nhất 3 ký tự
+                    </small>
                   </div>
                   <div class="col-md-6 col-sm-12 col-xs-12">
-                      <label >Danh mục</label>
+                    <label>Alias</label>
+                    <input type="text" #alias="ngModel" [(ngModel)]="entity.Alias" required minlength="3" name="alias"
+                      class="form-control" />
+                    <small [hidden]="alias.valid || (alias.pristine && !addEditForm.submitted)" class="text-danger">
+                      Bạn phải nhập alias
+                    </small>
+                  </div>
+                </div>
+                <div class="row m-b-10 m-l-5 m-r-5">
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+                    <label>Danh mục</label>
                     <select class="form-control" name="categoryID" [(ngModel)]="entity.CategoryID">
                       <option value="">--Chọn chức năng cha--</option>
                       <option *ngFor="let x of productCategories" [value]="x.ID">{{x.Name}}</option>
@@ -157,7 +148,7 @@
                     <input type="hidden" [(ngModel)]="entity.CategoryID" name="categoryID" class="form-control" />
                   </div>
                   <div class="col-md-6 col-sm-12 col-xs-12">
-                      <label>Giá bán</label>
+                    <label>Giá bán</label>
                     <input type="number" #price="ngModel" [(ngModel)]="entity.Price" required name="price" class="form-control" />
                     <div class="checkbox">
                       <label>
@@ -169,8 +160,10 @@
                       Bạn phải nhập giá bán
                     </small>
                   </div>
+                </div>
+                <div class="row m-b-10 m-l-5 m-r-5">
                   <div class="col-md-6 col-sm-12 col-xs-12">
-                      <label>Giá nhập</label>
+                    <label>Giá nhập</label>
                     <input type="number" #originalPrice="ngModel" [(ngModel)]="entity.OriginalPrice" required name="originalPrice"
                       class="form-control" />
                     <small [hidden]="originalPrice.valid || (originalPrice.pristine && !addEditForm.submitted)" class="text-danger">
@@ -178,12 +171,32 @@
                     </small>
                   </div>
                   <div class="col-md-6 col-sm-12 col-xs-12">
-                      <label >Giá KM</label>
+                    <label>Giá KM</label>
                     <input type="number" #promotionPrice="ngModel" [(ngModel)]="entity.PromotionPrice" name="promotionPrice"
                       class="form-control" />
                   </div>
+                </div>
+                <div class="row m-b-10 m-l-5 m-r-5">
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <label>Image
+                        <span class="error">*</span>
+                      </label>
+                      <div class="thumbnail" (click)="openImageExplorer()">
+                        <img src="./../../../assets/images/upload.png" width="40">
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12" *ngIf="entity.ThumbnailImage">
+                      <img [src]="entity.ThumbnailImage" width="100%">
+                    </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row m-b-10 m-l-5 m-r-5">
                   <div class="col-md-6 col-sm-12 col-xs-12">
-                      <label>Trạng thái</label>
+                    <label>Trạng thái</label>
                     <div class="checkbox">
                       <label>
                         <input type="checkbox" [(ngModel)]="entity.Status" name="status" #status="ngModel"> Kích hoạt
@@ -191,7 +204,8 @@
                     </div>
                     <div class="checkbox">
                       <label>
-                        <input type="checkbox" [(ngModel)]="entity.HomeFlag" name="homeFlag" #status="ngModel"> Hiển thị
+                        <input type="checkbox" [(ngModel)]="entity.HomeFlag" name="homeFlag" #status="ngModel"> Hiển
+                        thị
                         trang chủ
                       </label>
                     </div>
@@ -202,44 +216,46 @@
                       </label>
                     </div>
                   </div>
+                </div>
+
               </div>
-            
+
             </div>
 
-            <div  role="tabpanel" id="more-info" class="tab-pane">
-             <div class="form-group row m-b-10 m-l-5 m-r-5">
+            <div role="tabpanel" id="more-info" class="tab-pane">
+              <div class="form-group row m-b-10 m-l-5 m-r-5">
                 <div class="col-md-12 col-sm-12 col-xs-12">
-                    <label >Mô tả</label>
-                    <textarea id="summernote2" #description="ngModel" [(ngModel)]="entity.Description" name="description" class="form-control" rows="3"></textarea>
-                  <!-- <ckeditor #description="ngModel" [(ngModel)]="entity.Description" name="description" [config]="myCkeditorConfig">
-                  </ckeditor> -->
+                  <label>Mô tả</label>
+                  <!-- <textarea id="summernote2" #description="ngModel" [(ngModel)]="entity.Description" name="description" class="form-control" rows="3"></textarea> -->
+                  <ckeditor #description="ngModel" [(ngModel)]="entity.Description" name="description" [config]="myCkeditorConfig">
+                  </ckeditor>
                 </div>
                 <div class="col-md-12 col-sm-12 col-xs-12">
-                    <label >Chi tiết sản phẩm</label>
-                    <textarea id="summernote" #content="ngModel" [(ngModel)]="entity.Content" name="content" class="form-control" rows="3"></textarea>
+                  <label>Chi tiết sản phẩm</label>
+                  <!-- <textarea id="summernote" #content="ngModel" [(ngModel)]="entity.Content" name="content" class="form-control" rows="3"></textarea> -->
 
-                  <!-- <ckeditor [(ngModel)]="entity.Content" #content="ngModel" name="content"  [config]="myCkeditorConfig">
-                  </ckeditor> -->
+                  <ckeditor [(ngModel)]="entity.Content" #content="ngModel" name="content" [config]="myCkeditorConfig">
+                  </ckeditor>
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
-                    <label >Bảo hành (tháng)</label>
+                  <label>Bảo hành (tháng)</label>
                   <input type="number" #warranty="ngModel" [(ngModel)]="entity.Warranty" name="warranty" class="form-control" />
                 </div>
-               
+
                 <div class="col-md-6 col-sm-12 col-xs-12">
-                    <label>Từ khóa</label>
+                  <label>Từ khóa</label>
                   <input type="text" #metaKeyword="ngModel" [(ngModel)]="entity.MetaKeyword" name="keyword" class="form-control" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
-                    <label >Mô tả SEO</label>
+                  <label>Mô tả SEO</label>
                   <textarea type="text" #metaDescription="ngModel" rows=4 [(ngModel)]="entity.MetaDescription" name="metaDescription"
                     class="form-control"></textarea>
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
-                    <label>Tags</label>
+                  <label>Tags</label>
                   <input type="text" #tags="ngModel" [(ngModel)]="entity.Tags" name="tags" class="form-control" />
                 </div>
-            </div>
+              </div>
             </div>
           </div>
 
@@ -256,6 +272,8 @@
     </div>
   </div>
 </div>
+<modalimage (SaveCompolete)="SaveCompolete($event)"></modalimage>
+<div [ngBusy]="busy"></div>
 <!--Quản lý ảnh-->
 <div bsModal #imageManageModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
   aria-hidden="true">
@@ -272,23 +290,23 @@
           (ngSubmit)="saveProductImage(imageForm.valid)">
 
           <div class="form-group">
-              <div class="row m-b-10 m-l-5">
-                  <div class="col-md-4 col-sm-12 col-xs-12">
-                      <label>Chọn ảnh</label>
+            <div class="row m-b-10 m-l-5">
+              <div class="col-md-4 col-sm-12 col-xs-12">
+                <!-- <label>Chọn ảnh</label>
                       <input type="file" required #imagePath name="imagePath" ng2FileSelect [uploader]="moreImage" id="load-file"
                         class="form-control">
                       <p class="help-block label label-danger"> chỉ hỗ trợ định dạng *.png, *.jpg, *.jpeg </p>
                       <input type="hidden" [(ngModel)]="imageEntity.Path" name="imagePath" />
-                      <input type="hidden" [(ngModel)]="imageEntity.ProductId" name="productId" />
-                    </div>
-                    <div class="col-md-4 col-sm-12 col-xs-12">
-                      <label for="ex2">Mô tả</label>
-                      <input class="form-control" name="caption" [(ngModel)]="imageEntity.Caption" type="text">
-                    </div>
-                    <div class="col-md-4 col-sm-12 col-xs-12">
-                      <button type="submit" class="btn btn-primary mt-24" [disabled]="!imageForm.valid">Thêm</button>
-                    </div>
+                      <input type="hidden" [(ngModel)]="imageEntity.ProductId" name="productId" /> -->
               </div>
+              <div class="col-md-4 col-sm-12 col-xs-12">
+                <label for="ex2">Mô tả</label>
+                <input class="form-control" name="caption" [(ngModel)]="imageEntity.Caption" type="text">
+              </div>
+              <div class="col-md-4 col-sm-12 col-xs-12">
+                <button type="submit" class="btn btn-primary mt-24" [disabled]="!imageForm.valid">Thêm</button>
+              </div>
+            </div>
           </div>
 
         </form>
@@ -339,42 +357,42 @@
         <form class="form-horizontal form-label-left input_mask" novalidate #quantityForm="ngForm" (ngSubmit)="saveProductQuantity(quantityForm.valid)"
           *ngIf="quantityEntity">
           <div class="form-group">
-              <div class="row m-b-10 m-l-5">
-                  <div class="col-md-3 col-sm-12 col-xs-12">
-                      <label>Màu sắc</label>
-                      <select class="form-control" required #colorId="ngModel" name="colorId" [(ngModel)]="quantityEntity.ColorId">
-                        <option value="">--Chọn màu--</option>
-                        <option *ngFor="let x of colors" [value]="x.ID">{{x.Name}}</option>
-                      </select>
-                      <input type="hidden" [(ngModel)]="quantityEntity.ProductId" name="productId" />
-        
-                      <small [hidden]="colorId.valid || (colorId.pristine && !quantityForm.submitted)" class="text-danger">
-                        Bạn phải chọn màu sắc
-                      </small>
-                    </div>
-                    <div class="col-md-3 col-sm-12 col-xs-12">
-                      <label>Cỡ</label>
-                      <select class="form-control" required #sizeId="ngModel" name="sizeId" [(ngModel)]="quantityEntity.SizeId">
-                        <option value="">--Chọn cỡ--</option>
-                        <option *ngFor="let x of sizes" [value]="x.ID">{{x.Name}}</option>
-                      </select>
-                      <small [hidden]="sizeId.valid || (sizeId.pristine && !quantityForm.submitted)" class="text-danger">
-                        Bạn phải nhập cỡ
-                      </small>
-                    </div>
-                    <div class="col-md-3 col-sm-12 col-xs-12">
-                      <label>Số lượng</label>
-                      <input class="form-control" type="number" #quantity="ngModel" name="quantity" [(ngModel)]="quantityEntity.Quantity"
-                        required>
-                      <small [hidden]="quantity.valid || (quantity.pristine && !quantityForm.submitted)" class="text-danger">
-                        Bạn phải nhập số lượng
-                      </small>
-                    </div>
-                    <div class="col-md-3 col-sm-12 col-xs-12">
-                      <button type="submit" [disabled]="!quantityForm.valid" class="btn btn-primary mt-24">Thêm</button>
-                    </div>
+            <div class="row m-b-10 m-l-5">
+              <div class="col-md-3 col-sm-12 col-xs-12">
+                <label>Màu sắc</label>
+                <select class="form-control" required #colorId="ngModel" name="colorId" [(ngModel)]="quantityEntity.ColorId">
+                  <option value="">--Chọn màu--</option>
+                  <option *ngFor="let x of colors" [value]="x.ID">{{x.Name}}</option>
+                </select>
+                <input type="hidden" [(ngModel)]="quantityEntity.ProductId" name="productId" />
+
+                <small [hidden]="colorId.valid || (colorId.pristine && !quantityForm.submitted)" class="text-danger">
+                  Bạn phải chọn màu sắc
+                </small>
               </div>
-           
+              <div class="col-md-3 col-sm-12 col-xs-12">
+                <label>Cỡ</label>
+                <select class="form-control" required #sizeId="ngModel" name="sizeId" [(ngModel)]="quantityEntity.SizeId">
+                  <option value="">--Chọn cỡ--</option>
+                  <option *ngFor="let x of sizes" [value]="x.ID">{{x.Name}}</option>
+                </select>
+                <small [hidden]="sizeId.valid || (sizeId.pristine && !quantityForm.submitted)" class="text-danger">
+                  Bạn phải nhập cỡ
+                </small>
+              </div>
+              <div class="col-md-3 col-sm-12 col-xs-12">
+                <label>Số lượng</label>
+                <input class="form-control" type="number" #quantity="ngModel" name="quantity" [(ngModel)]="quantityEntity.Quantity"
+                  required>
+                <small [hidden]="quantity.valid || (quantity.pristine && !quantityForm.submitted)" class="text-danger">
+                  Bạn phải nhập số lượng
+                </small>
+              </div>
+              <div class="col-md-3 col-sm-12 col-xs-12">
+                <button type="submit" [disabled]="!quantityForm.valid" class="btn btn-primary mt-24">Thêm</button>
+              </div>
+            </div>
+
           </div>
         </form>
         <table class="table" *ngIf="productQuantities && productQuantities.length > 0">

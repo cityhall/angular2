@@ -5,10 +5,11 @@ import { UtilityService } from '../../core/services/utility.service';
 import { AuthenService } from '../../core/services/authen.service';
 import { MessageConstants } from '../../core/common/message.constants';
 import { SystemConstants } from '../../core/common/system.constants';
-import { UploadService } from '../../core/services/upload.service';
 import { ModalDirective } from 'ngx-bootstrap/modal';
-import { Router } from '@angular/router';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
+import { ModalimageComponent } from '../../shared/modalimage/modalimage.component';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-product',
@@ -19,6 +20,8 @@ export class ProductComponent implements OnInit {
   /*Declare modal */
   @ViewChild('addEditModal') public addEditModal: ModalDirective;
   @ViewChild("thumbnailImage") thumbnailImage;
+  @ViewChild(ModalimageComponent) modalImage: ModalimageComponent;
+
   /*Product manage */
   public baseFolder: string = SystemConstants.BASE_API;
   public entity: any;
@@ -47,6 +50,7 @@ export class ProductComponent implements OnInit {
   @ViewChild('quantityManageModal') public quantityManageModal: ModalDirective;
   public quantityEntity: any = {};
   public productQuantities: any = [];
+  public busy: Subscription;
 
   public uploader:FileUploader = new FileUploader({url: SystemConstants.BASE_API+'api/upload/saveImage?type=product',authToken: "Bearer " + this._authenService.getLoggedInUser().access_token});
   public moreImage:FileUploader = new FileUploader({url: SystemConstants.BASE_API+'api/upload/saveImage?type=product',authToken: "Bearer " + this._authenService.getLoggedInUser().access_token});
@@ -61,7 +65,7 @@ export class ProductComponent implements OnInit {
     this.loadProductCategories();
     this.filterCategoryID = null;
   }
-  
+
   public createAlias() {
     this.entity.Alias = this.utilityService.MakeSeoTitle(this.entity.Name);
   }
@@ -108,6 +112,13 @@ export class ProductComponent implements OnInit {
     }, error => this._dataService.handleError(error));
   }
   //Save change for modal popup
+  openImageExplorer() {
+    this.modalImage.showImage();
+  }
+  SaveCompolete(event: any){
+    this.entity.ThumbnailImage = event.Path + event.NameFullSize;
+  }
+
   public saveChanges(valid: boolean) {
     $('.preloader').show();
     if (valid) {
@@ -131,7 +142,6 @@ export class ProductComponent implements OnInit {
   }
   private saveData() {
     if (this.entity.ID == undefined) {
-      this.entity.Content = $('#summernote').summernote('code');
       this._dataService.post('/api/product/add', JSON.stringify(this.entity)).subscribe((response: any) => {
         this.search();
         this.addEditModal.hide();
@@ -139,8 +149,6 @@ export class ProductComponent implements OnInit {
       });
     }
     else {
-      this.entity.Content = $('#summernote').summernote('code');
-      debugger
       this._dataService.put('/api/product/update', JSON.stringify(this.entity)).subscribe((response: any) => {
         this.search();
         this.addEditModal.hide();

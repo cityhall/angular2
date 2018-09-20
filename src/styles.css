@@ -14,8 +14,7 @@
 }
 
 .pagination{
-    padding-top: 10px;
-    float: right;
+   
 }    
 .modal-header .close {
     font-size: 20px;
@@ -30,4 +29,11 @@
 }
 textarea {
     resize: auto;
+}
+.ngx-pagination {
+    padding-top: 10px;
+    float: right;
+  }
+  .thumbnail{
+    cursor: pointer;
 }

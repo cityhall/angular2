@@ -13,10 +13,11 @@ import { SharedModule} from '../SharedModule'
     UserModule,
     SharedModule,
     HomeModule,
+  
     RouterModule.forChild(mainRoutes)
   ],
   declarations: [MainComponent],
-  
+  exports: [],
   providers:[]
 })
 export class MainModule { }

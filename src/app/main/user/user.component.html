@@ -37,7 +37,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let user of users | SearchPipe: 'FullName,UserName':query">
+                <tr *ngFor="let user of users | SearchPipe: 'FullName,UserName':query | paginate: { itemsPerPage: 10, currentPage: pageIndex }">
                   <td><img [src]="baselink+user.Avatar" width="40"></td>
                   <td>{{user.UserName}}</td>
                   <td>{{user.FullName}}</td>
@@ -54,9 +54,10 @@
               </tbody>
             </table>
             <div class="col-md-12">
-              <pagination [boundaryLinks]="true" [itemsPerPage]="pageSize" (pageChanged)="pageChanged($event)"
-                [totalItems]="totalRow" [(ngModel)]="pageIndex" class="pagination" previousText="&lsaquo;" nextText="&rsaquo;"
-                firstText="&laquo;" lastText="&raquo;"></pagination>
+              <pagination-controls  (pageChange)="pageIndex = $event" 
+               responsive="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+                screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+              </pagination-controls>
             </div>
           </div>
         </div>
@@ -112,70 +113,78 @@
                 <label>Xác nhận mật khẩu</label>
                 <input type="password" #confirmpassword="ngModel" [(ngModel)]="entity.ConfirmPassword" required
                   validateEqual="password" minlength="6" name="confirmpassword" class="form-control">
-                <small [hidden]="confirmpassword.valid || (confirmpassword.pristine && !addEditForm.submitted)" class="text-danger">
+                <small *ngIf="entity.ConfirmPassword != entity.Password" class="text-danger">
                   Xác nhận mật khẩu sai
                 </small>
+
               </div>
             </div>
             <div class="row m-b-10 m-l-5 m-r-5">
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                    <label>Email</label>
-                  <input type="text" #email="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" [(ngModel)]="entity.Email"
-                    required name="email" class="form-control">
-                  <small [hidden]="email.valid || (email.pristine && !addEditForm.submitted)" class="text-danger">
-                    Bạn phải nhập email
-                  </small>
-                </div>
-                 
-            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <label>Email</label>
+                <input type="text" #email="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" [(ngModel)]="entity.Email"
+                  required name="email" class="form-control">
+                <small [hidden]="email.valid || (email.pristine && !addEditForm.submitted)" class="text-danger">
+                  Bạn phải nhập email
+                </small>
+              </div>
+
+              <div class="col-md-6 col-sm-12 col-xs-12">
                 <label>Địa chỉ</label>
-              <input type="text" #address="ngModel" [(ngModel)]="entity.Address" name="address" class="form-control">
-            </div>
+                <input type="text" #address="ngModel" [(ngModel)]="entity.Address" name="address" class="form-control">
+              </div>
             </div>
             <div class="row m-b-10 m-l-5 m-r-5">
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                    <label>Điện thoại</label>
-                  <input type="text" #phonenumber="ngModel" [(ngModel)]="entity.PhoneNumber" required name="phonenumber"
-                    class="form-control">
-                  <small [hidden]="phonenumber.valid || (phonenumber.pristine && !addEditForm.submitted)" class="text-danger">
-                    Bạn phải nhập số điện thoại
-                  </small>
-                </div>
-                
-            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <label>Điện thoại</label>
+                <input type="text" #phonenumber="ngModel" [(ngModel)]="entity.PhoneNumber" required name="phonenumber"
+                  class="form-control">
+                <small [hidden]="phonenumber.valid || (phonenumber.pristine && !addEditForm.submitted)" class="text-danger">
+                  Bạn phải nhập số điện thoại
+                </small>
+              </div>
+
+              <div class="col-md-6 col-sm-12 col-xs-12">
                 <label>Ngày sinh</label>
-              <input type="text" #birthday="ngModel" daterangepicker (selected)="selectedDate($event)" [options]="dateOptions"
-                [(ngModel)]="entity.BirthDay" name="birthday" class="form-control">
-            </div>
-            </div>
-            <div class="row m-b-10 m-l-5 m-r-5">
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                    <label >Avatar</label>
-                  <input class="form-control" #avatar type="file" name="photo" ng2FileSelect [uploader]="uploader" />
-                  <p class="help-block label label-danger"> chỉ hỗ trợ định dạng *.png, *.jpg, *.jpeg </p>
-                  <input type="hidden" [(ngModel)]="entity.Avatar" name="avatarUrl" />
-                </div>
-                
-            <div class="col-md-6 col-sm-12 col-xs-12">
-                <img [src]="baselink+entity.Avatar" width="128" />
+                <input type="text" #birthday="ngModel" daterangepicker (selected)="selectedDate($event)" [options]="dateOptions"
+                  [(ngModel)]="entity.BirthDay" name="birthday" class="form-control">
               </div>
             </div>
             <div class="row m-b-10 m-l-5 m-r-5">
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                    <label>Giới tính</label>
-                    <br>
-                  <input type="radio" (change)="selectGender($event)" #gender="ngModel" [checked]="entity.Gender=='True'"
-                    name="gender" [ngModel]="entity.Gender" value="True" required /> Nam
-                  <input type="radio" (change)="selectGender($event)" #gender="ngModel" [checked]="entity.Gender=='False'"
-                    name="gender" [ngModel]="entity.Gender" value="False" /> Nữ
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12 fixselect">
-                    <label>Thuộc nhóm</label>
-                    <br>
-                  <ss-multiselect-dropdown [ngModelOptions]="{standalone: true}" [options]="allRoles" [settings]="settings"
-                    [(ngModel)]="myRoles"></ss-multiselect-dropdown>
+
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="row">
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <label>Avatar
+                      <span class="error">*</span>
+                    </label>
+                    <div class="thumbnail" (click)="openImageExplorer()">
+                      <img src="./../../../assets/images/upload.png" width="40">
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-6 col-xs-12" *ngIf="entity.Avatar">
+                    <img [src]="baselink+entity.Avatar" width="100%">
+                  </div>
                 </div>
               </div>
+
+            </div>
+            <div class="row m-b-10 m-l-5 m-r-5">
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <label>Giới tính</label>
+                <br>
+                <input type="radio" (change)="selectGender($event)" #gender="ngModel" [checked]="entity.Gender=='True'"
+                  name="gender" [ngModel]="entity.Gender" value="True" required /> Nam
+                <input type="radio" (change)="selectGender($event)" #gender="ngModel" [checked]="entity.Gender=='False'"
+                  name="gender" [ngModel]="entity.Gender" value="False" /> Nữ
+              </div>
+              <div class="col-md-6 col-sm-12 col-xs-12 fixselect">
+                <label>Thuộc nhóm</label>
+                <br>
+                <ss-multiselect-dropdown [ngModelOptions]="{standalone: true}" [options]="allRoles" [settings]="settings"
+                  [(ngModel)]="myRoles"></ss-multiselect-dropdown>
+              </div>
+            </div>
           </div>
           <div class="ln_solid"></div>
           <div class="form-group">
@@ -190,3 +199,5 @@
     </div>
   </div>
 </div>
+<modalimage (SaveCompolete)="SaveCompolete($event)"></modalimage>
+<div [ngBusy]="busy"></div>

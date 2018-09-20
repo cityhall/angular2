@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate([UrlConstants.HOME]);
       
     }).catch(error=>{
-      this.notificationService.printErrorMessage(MessageConstants.SYSTEM_ERROR_MSG);
+      this.notificationService.printErrorMessage('Sai tên đăng nhập hoặc mật khẩu!');
       this.loading = false;
     });
   }
