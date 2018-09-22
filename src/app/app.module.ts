@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -14,6 +15,7 @@ import { AuthenService } from '../app/core/services/authen.service';
 import { DataService } from '../app/core/services/data.service';
 import { SignalrService } from '../app/core/services/signalr.service';
 import { NotificationService } from '../app/core/services/notification.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +24,7 @@ import { NotificationService } from '../app/core/services/notification.service';
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes, { useHash: false }),
     PaginationModule.forRoot()

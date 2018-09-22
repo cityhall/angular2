@@ -27,17 +27,21 @@ export class RoleComponent implements OnInit {
     this.searchText='ff';
   }
   loadData() {
+    $('.preloader').show();
     this._dataService.get('/api/appRole/getlistpaging?page=' + this.pageIndex + '&pageSize=' + this.pageSize + '&filter=' + this.filter)
       .subscribe((response: any) => {
         this.roles = response.Items;
+        $('.preloader').hide();
         this.pageIndex = response.PageIndex;
         this.pageSize = response.PageSize;
         this.totalRow = response.TotalRows;
       });
   }
   loadDetai(id: any) {
+    $('.preloader').show();
     this._dataService.get('/api/appRole/detail/' + id).subscribe
       ((res: any) => {
+        $('.preloader').hide();
         this.entity = res;
       })
   }
@@ -56,6 +60,7 @@ export class RoleComponent implements OnInit {
     this.modalAddEdit.show();
   }
   saveChange(valid: boolean) {
+    $('.preloader').show();
     if (valid) {
       if (this.entity.Id == undefined) {
         this._dataService.post('/api/appRole/add', JSON.stringify(this.entity))
@@ -78,8 +83,10 @@ export class RoleComponent implements OnInit {
     this._notificationService.printConfirmationDialog(MessageConstants.CONFIRM_DELETE_MSG, () => this.deteleItemConfirm(id))
   }
   deteleItemConfirm(id: any) {
+    $('.preloader').show();
     this._dataService.delete('/api/appRole/delete', 'id', id).subscribe((response: Response) => {
       this._notificationService.printSuccessMessage(MessageConstants.DELETE_OK_MSG);
+      $('.preloader').hide();
       this.loadData();
     })
   }

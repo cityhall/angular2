@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SearchPipe } from './core/filter/search.pipe';
+import { SearchPipe,EscapeHtmlPipe } from './core/filter/search.pipe';
 import { OrderBy } from './core/filter/orderBy.pipe';
-import { FileSelectDirective } from 'ng2-file-upload';
+import { FileUploadModule  } from 'ng2-file-upload';
+import { BusyModule } from 'angular2-busy';
+import {NgxPaginationModule} from 'ngx-pagination'; 
 
 @NgModule({
-    imports: [CommonModule],
-    declarations: [SearchPipe,FileSelectDirective,OrderBy],
-    exports: [SearchPipe,FileSelectDirective,OrderBy]
+    imports: [CommonModule,FileUploadModule,BusyModule,NgxPaginationModule],
+    declarations: [SearchPipe,OrderBy,EscapeHtmlPipe ],
+    exports: [SearchPipe,OrderBy,EscapeHtmlPipe,FileUploadModule,BusyModule,NgxPaginationModule]
 })
 export class SharedModule {
     

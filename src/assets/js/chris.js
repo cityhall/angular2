@@ -1,7 +1,13 @@
 
-$(document).ready(function () {
-    $('[data-toggle="tooltip"]').tooltip();
-});
+ setTimeout(function(){ 
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
+    $(document).ready(function() {
+        $('#summernote').summernote();
+      });
+ }, 7000);
+
 
 //home
 $('body').on('click', '.nuttab li', function () {

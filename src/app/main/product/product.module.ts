@@ -9,26 +9,26 @@ import { UtilityService } from './../../core/services/utility.service';
 import { UploadService } from './../../core/services/upload.service';
 import { Daterangepicker } from 'ng2-daterangepicker';
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
-import { SimpleTinyComponent } from '../../shared/simple-tiny/simple-tiny.component';
 import { CKEditorModule } from 'ng2-ckeditor';
-import { SharedModule} from '../../SharedModule'
-import { Routes, RouterModule } from '@angular/router';
+import { SharedModule } from '../../SharedModule'
+import { ModalimageModule } from './../../shared/modalimage/modalimage.module';
+import { Routes } from '@angular/router';
 
-
-const productRoutes:  Routes=[
-  {path:'',redirectTo:'index',pathMatch:'full'},
-  {path:'index',component:ProductComponent},
+const productRoutes: Routes = [
+  { path: '', redirectTo: 'index', pathMatch: 'full' },
+  { path: 'index', component: ProductComponent },
 ]
 
 @NgModule({
   imports: [
-        CommonModule,
+    CommonModule,
     ProductRouter,
     FormsModule,
     CKEditorModule,
     PaginationModule,
     ModalModule,
     SharedModule,
+    ModalimageModule,
     Daterangepicker,
     MultiselectDropdownModule
   ],

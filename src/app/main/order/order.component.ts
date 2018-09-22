@@ -1,15 +1,10 @@
-import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../core/services/data.service';
 import { NotificationService } from '../../core/services/notification.service';
 import { UtilityService } from '../../core/services/utility.service';
 import { AuthenService } from '../../core/services/authen.service';
-
 import { MessageConstants } from '../../core/common/message.constants';
-import { SystemConstants } from '../../core/common/system.constants';
 import { UploadService } from '../../core/services/upload.service';
-import { ModalDirective } from 'ngx-bootstrap/modal';
-import { IMultiSelectOption } from 'angular-2-dropdown-multiselect';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order',
@@ -41,12 +36,14 @@ export class OrderComponent implements OnInit {
     this.search();
   }
   public search() {
+    $('.preloader').show();
     this._dataService.get('/api/order/getlistpaging?page=' + this.pageIndex
       + '&pageSize=' + this.pageSize + '&startDate=' + this.filterStartDate
       + '&endDate=' + this.filterEndDate + '&customerName=' + this.filterCustomerName
       + '&paymentStatus=' + this.filterPaymentStatus)
       .subscribe((response: any) => {
         this.orders = response.Items;
+        $('.preloader').hide();
         this.pageIndex = response.PageIndex;
       }, error => this._dataService.handleError(error));
   }
@@ -59,6 +56,7 @@ export class OrderComponent implements OnInit {
   }
 
   public delete(id: string) {
+    $('.preloader').show();
     this.notificationService.printConfirmationDialog(MessageConstants.CONFIRM_DELETE_MSG, () => {
       this._dataService.delete('/api/order/delete', 'id', id).subscribe((response: any) => {
         this.notificationService.printSuccessMessage(MessageConstants.DELETE_OK_MSG);

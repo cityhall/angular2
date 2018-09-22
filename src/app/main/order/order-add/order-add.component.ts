@@ -62,10 +62,12 @@ export class OrderAddComponent implements OnInit {
 
   //Save change for modal popup
   public saveChanges(valid: boolean) {
+    $('.preloader').show();
     if (valid) {
       this.entity.OrderDetails = this.orderDetails;
       this._dataService.post('/api/order/add', JSON.stringify(this.entity)).subscribe((response: any) => {
         this.entity = response;
+        $('.preloader').hide();
         this.notificationService.printSuccessMessage(MessageConstants.CREATED_OK_MSG);
       }, error => this._dataService.handleError(error));
 
@@ -76,7 +78,6 @@ export class OrderAddComponent implements OnInit {
     if (valid) {
       this.addEditModal.hide();
       this.detailEntity.Product = this.products.find(x => x.ID == this.detailEntity.ProductID);
-      debugger
       this.orderDetails.push(this.detailEntity);
       this.detailEntity = {
         ProductID: 0,

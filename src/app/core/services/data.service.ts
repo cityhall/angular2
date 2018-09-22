@@ -48,7 +48,6 @@ export class DataService {
     }
     return this._http.delete(SystemConstants.BASE_API + uri + "/?" + paramStr, { headers: this.headers })
       .pipe(catchError(this.handleError));
-
   }
   postFile(uri: string, data?: any) {
        return this._http.post(SystemConstants.BASE_API + uri, data, { headers: this.headers })
@@ -56,7 +55,7 @@ export class DataService {
   }
 
   public handleError(err: any) {
-   
+    $('.preloader').hide();
     if (err.status == 401) {
       localStorage.removeItem(SystemConstants.CURRENT_USER);
       this._notificationService.printErrorMessage(MessageConstants.LOGIN_AGAIN_MSG);

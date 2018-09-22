@@ -3,13 +3,14 @@ import { UserComponent } from './user.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { PaginationModule } from 'ngx-bootstrap/pagination';
+//import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { FormsModule} from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 import { Daterangepicker } from 'ng2-daterangepicker';
 import { SharedModule} from '../../SharedModule'
 import { UploadService } from '../../core/services/upload.service';
+import { ModalimageModule } from './../../shared/modalimage/modalimage.module';
 
 const userRoutes:  Routes=[
   {path:'',redirectTo:'index',pathMatch:'full'},
@@ -18,9 +19,10 @@ const userRoutes:  Routes=[
 @NgModule({
   imports: [
     CommonModule,
-    PaginationModule,
+    //PaginationModule,
     FormsModule,
     MultiselectDropdownModule,
+    ModalimageModule,
     Daterangepicker,
     SharedModule,
     ModalModule.forRoot(),

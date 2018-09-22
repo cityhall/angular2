@@ -5,10 +5,11 @@ import { UtilityService } from '../../core/services/utility.service';
 import { AuthenService } from '../../core/services/authen.service';
 import { MessageConstants } from '../../core/common/message.constants';
 import { SystemConstants } from '../../core/common/system.constants';
-import { UploadService } from '../../core/services/upload.service';
 import { ModalDirective } from 'ngx-bootstrap/modal';
-import { Router } from '@angular/router';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
+import { ModalimageComponent } from '../../shared/modalimage/modalimage.component';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-product',
@@ -19,6 +20,8 @@ export class ProductComponent implements OnInit {
   /*Declare modal */
   @ViewChild('addEditModal') public addEditModal: ModalDirective;
   @ViewChild("thumbnailImage") thumbnailImage;
+  @ViewChild(ModalimageComponent) modalImage: ModalimageComponent;
+
   /*Product manage */
   public baseFolder: string = SystemConstants.BASE_API;
   public entity: any;
@@ -47,6 +50,7 @@ export class ProductComponent implements OnInit {
   @ViewChild('quantityManageModal') public quantityManageModal: ModalDirective;
   public quantityEntity: any = {};
   public productQuantities: any = [];
+  public busy: Subscription;
 
   public uploader:FileUploader = new FileUploader({url: SystemConstants.BASE_API+'api/upload/saveImage?type=product',authToken: "Bearer " + this._authenService.getLoggedInUser().access_token});
   public moreImage:FileUploader = new FileUploader({url: SystemConstants.BASE_API+'api/upload/saveImage?type=product',authToken: "Bearer " + this._authenService.getLoggedInUser().access_token});
@@ -61,15 +65,16 @@ export class ProductComponent implements OnInit {
     this.loadProductCategories();
     this.filterCategoryID = null;
   }
-  
+
   public createAlias() {
     this.entity.Alias = this.utilityService.MakeSeoTitle(this.entity.Name);
   }
   public search() {
+    $('.preloader').show();
     this._dataService.get('/api/product/getall?page=' + this.pageIndex + '&pageSize=' + this.pageSize + '&keyword=' + this.filter + '&categoryId=' + this.filterCategoryID)
       .subscribe((response: any) => {
         this.products = response.Items;
-        console.log(this.products)
+        $('.preloader').hide();
         this.pageIndex = response.PageIndex;
       }, error => this._dataService.handleError(error));
   }
@@ -92,6 +97,7 @@ export class ProductComponent implements OnInit {
   }
 
   public delete(id: string) {
+    $('.preloader').show();
     this.notificationService.printConfirmationDialog(MessageConstants.CONFIRM_DELETE_MSG, () => {
       this._dataService.delete('/api/product/delete', 'id', id).subscribe((response: any) => {
         this.notificationService.printSuccessMessage(MessageConstants.DELETE_OK_MSG);
@@ -106,7 +112,15 @@ export class ProductComponent implements OnInit {
     }, error => this._dataService.handleError(error));
   }
   //Save change for modal popup
+  openImageExplorer() {
+    this.modalImage.showImage();
+  }
+  SaveCompolete(event: any){
+    this.entity.ThumbnailImage = event.Path + event.NameFullSize;
+  }
+
   public saveChanges(valid: boolean) {
+    $('.preloader').show();
     if (valid) {
       let fi = this.thumbnailImage.nativeElement;
       if (fi.files.length > 0) {
@@ -173,11 +187,14 @@ export class ProductComponent implements OnInit {
 }
 
  public loadProductImages(id: number) {
+  $('.preloader').show();
   this._dataService.get('/api/productImage/getall?productId=' + id).subscribe((response: any[]) => {
     this.productImages = response;
+    $('.preloader').hide();
   }, error => this._dataService.handleError(error));
 }
 public deleteImage(id: number) {
+  $('.preloader').show();
   this.notificationService.printConfirmationDialog(MessageConstants.CONFIRM_DELETE_MSG, () => {
     this._dataService.delete('/api/productImage/delete', 'id', id.toString()).subscribe((response: any) => {
       this.notificationService.printSuccessMessage(MessageConstants.DELETE_OK_MSG);
@@ -187,6 +204,7 @@ public deleteImage(id: number) {
 }
 
 public saveProductImage(isValid: boolean) {
+  $('.preloader').show();
   if (isValid) {
     let fi = this.imagePath.nativeElement;
     if (fi.files.length > 0) {
@@ -227,12 +245,15 @@ public loadSizes() {
 }
 
 public loadProductQuantities(id: number) {
+  $('.preloader').show();
   this._dataService.get('/api/productQuantity/getall?productId=' + id + '&sizeId=' + this.sizeId + '&colorId=' + this.colorId).subscribe((response: any[]) => {
     this.productQuantities = response;
+    $('.preloader').hide();
   }, error => this._dataService.handleError(error));
 }
 
 public saveProductQuantity(isValid: boolean) {
+  $('.preloader').show();
   if (isValid) {
     this._dataService.post('/api/productQuantity/add', JSON.stringify(this.quantityEntity)).subscribe((response: any) => {
       this.loadProductQuantities(this.quantityEntity.ProductId);
@@ -245,6 +266,7 @@ public saveProductQuantity(isValid: boolean) {
 }
 
  public deleteQuantity(productId: number, colorId: string, sizeId: string) {
+  $('.preloader').show();
   var parameters = { "productId": productId, "sizeId": sizeId, "colorId": colorId };
   this.notificationService.printConfirmationDialog(MessageConstants.CONFIRM_DELETE_MSG, () => {
     this._dataService.deleteWithMultiParams('/api/productQuantity/delete', parameters).subscribe((response: any) => {

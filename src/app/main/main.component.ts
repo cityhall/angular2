@@ -6,7 +6,6 @@ import { AuthenService } from '../core/services/authen.service';
 import { LoggedInUser} from '../core/domain/loggedin.user';
 import { SignalrService,  } from '../core/services/signalr.service';
 import { DataService, } from '../core/services/data.service';
-import {OrderBy} from "./../core/filter/orderBy.pipe"
 
 @Component({
   selector: 'app-main',
@@ -65,6 +64,7 @@ export class MainComponent implements OnInit {
   private loadAnnouncements() {
     this._dataService.get('/api/Announcement/getTopMyAnnouncement').subscribe((response: any) => {
       this.annoucements = [];
+      $('.preloader').hide();
       for (let item of response) {
         item.CreatedDate = moment(moment(new Date(item.CreatedDate)).format('MMMM Do YYYY, h:mm:s a'), 'MMMM Do YYYY, h:mm:s a').fromNow();
         this.annoucements.push(item);
@@ -74,7 +74,6 @@ export class MainComponent implements OnInit {
   }
 
   logout() {
-    
     localStorage.removeItem(SystemConstants.CURRENT_USER);
     this.utilityService.navigate(UrlConstants.LOGIN);
   }

@@ -35,9 +35,15 @@ export class OrderDetailComponent implements OnInit {
     });
 
   }
+  public goBack() {
+    this.utilityService.navigate('/admin/order/index');
+  }
+
   public loadOrder(id: number) {
+    $('.preloader').show();
     this._dataService.get('/api/order/detail/' + id.toString()).subscribe((response: any) => {
       this.entity = response;
+      $('.preloader').hide();
     }, error => this._dataService.handleError(error));
   }
   public exportToExcel() {

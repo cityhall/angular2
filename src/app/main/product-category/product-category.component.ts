@@ -35,10 +35,12 @@ export class ProductCategoryComponent implements OnInit {
   }
   //Load data
   public search() {
+    $('.preloader').show();
     this._dataService.get('/api/productCategory/getall?filter=' + this.filter)
       .subscribe((response: any[]) => {
         this._productCategoryHierachy = this.utilityService.Unflatten2(response);
         this._productCategories = response;
+        $('.preloader').hide();
         console.log(response)
       }, error => this._dataService.handleError(error));
   }
@@ -46,7 +48,6 @@ export class ProductCategoryComponent implements OnInit {
     this._dataService.get('/api/productCategory/getallhierachy')
       .subscribe((response: any[]) => {
         this._productCategories = response;
-        debugger
       }, error => this._dataService.handleError(error));
   }
   //Show add form
@@ -64,9 +65,11 @@ export class ProductCategoryComponent implements OnInit {
 
   //Action delete
   public deleteConfirm(id: string): void {
+    $('.preloader').show();
     this._dataService.delete('/api/productCategory/delete', 'id', id).subscribe((response: any) => {
       this.notificationService.printSuccessMessage(MessageConstants.DELETE_OK_MSG);
       this.search();
+      this.getListForDropdown();
     }, error => this._dataService.handleError(error));
   }
   //Click button delete turn on confirm
@@ -75,10 +78,12 @@ export class ProductCategoryComponent implements OnInit {
   }
   //Save change for modal popup
   public saveChanges(valid: boolean) {
+    $('.preloader').show();
     if (valid) {
       if (this.entity.ID == undefined) {
         this._dataService.post('/api/productCategory/add', JSON.stringify(this.entity)).subscribe((response: any) => {
           this.search();
+          this.getListForDropdown();
           this.addEditModal.hide();
           this.notificationService.printSuccessMessage(MessageConstants.CREATED_OK_MSG);
         }, error => this._dataService.handleError(error));
@@ -86,6 +91,7 @@ export class ProductCategoryComponent implements OnInit {
       else {
         this._dataService.put('/api/productCategory/update', JSON.stringify(this.entity)).subscribe((response: any) => {
           this.search();
+          this.getListForDropdown();
           this.addEditModal.hide();
           this.notificationService.printSuccessMessage(MessageConstants.UPDATED_OK_MSG);
         }, error => this._dataService.handleError(error));
