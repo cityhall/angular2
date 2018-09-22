@@ -110,8 +110,8 @@ export class UserComponent implements OnInit {
     this.modalAddEdit.show();
   }
   //Save change for modal popup
-  openImageExplorer() {
-    this.modalImage.showImage();
+  openImageExplorer(check:any) {
+    this.modalImage.showImage(check);
   }
   SaveCompolete(event: any) {
     var str = event.Path + event.NameFullSize;
