@@ -10,7 +10,6 @@ import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { ModalimageComponent } from '../../shared/modalimage/modalimage.component';
 import { Subscription } from 'rxjs';
 
-
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -35,7 +34,7 @@ export class ProductComponent implements OnInit {
   public productCategories: any[];
   public ckeditorContent: string = '';
   public checkedItems:any;
-  private myCkeditorConfig: any;
+  public myCkeditorConfig: any;
   //moreImage
   public imageEntity:any={};
   public productImages:any=[];
@@ -59,11 +58,14 @@ export class ProductComponent implements OnInit {
     private _dataService: DataService,
     private notificationService: NotificationService,
     private utilityService: UtilityService) {
+      
   }
+
   ngOnInit() {
     this.search();
     this.loadProductCategories();
     this.filterCategoryID = null;
+   
   }
 
   public createAlias() {
@@ -92,6 +94,7 @@ export class ProductComponent implements OnInit {
   public showEdit(id: string) {
     this._dataService.get('/api/product/detail/' + id).subscribe((response: any) => {
       this.entity = response;
+      console.log(this.entity)
       this.addEditModal.show();
     }, error => this._dataService.handleError(error));
   }
@@ -112,34 +115,33 @@ export class ProductComponent implements OnInit {
     }, error => this._dataService.handleError(error));
   }
   //Save change for modal popup
-  openImageExplorer() {
-    this.modalImage.showImage();
-  }
-  SaveCompolete(event: any){
-    this.entity.ThumbnailImage = event.Path + event.NameFullSize;
+  openImageExplorer(check:any) {
+    this.modalImage.showImage(check);
   }
 
-  public saveChanges(valid: boolean) {
-    $('.preloader').show();
-    if (valid) {
-      let fi = this.thumbnailImage.nativeElement;
-      if (fi.files.length > 0) {
-        this.uploader.uploadAll();
-        this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any): any => {
-          if(response){
-            this.entity.ThumbnailImage = response.slice(2,response.length-1);
-           this.uploader.queue=[];
-           this.saveData();
-           this.search();
-         }
-        }
-      }
-      else {
-        this.saveData();
-        this.search();
-      }
+
+  SaveCompolete(event: any) {
+    var str = event.Path + event.NameFullSize;
+    var n = str.indexOf("UploadedFiles");
+    var string = str.slice(n, str.length);
+    if(event.Check=='image'){
+      this.entity.ThumbnailImage = string;
+    }
+    if(event.Check=='editor1'){
+      var img = '<img src="'+this.baseFolder+string+'"/>';
+      this.entity.Description +=img;
+    }
+    if(event.Check=='editor2'){
+      var img = '<img src="'+this.baseFolder+string+'" />';
+      this.entity.Content +=img;
     }
   }
+ 
+  public saveChanges(valid: boolean) {
+    $('.preloader').show();
+      this.saveData();
+  }
+
   private saveData() {
     if (this.entity.ID == undefined) {
       this._dataService.post('/api/product/add', JSON.stringify(this.entity)).subscribe((response: any) => {

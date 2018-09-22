@@ -26,11 +26,12 @@ const productRoutes: Routes = [
     FormsModule,
     CKEditorModule,
     PaginationModule,
-    ModalModule,
-    SharedModule,
+    ModalModule.forRoot(),
     ModalimageModule,
+    SharedModule,
     Daterangepicker,
-    MultiselectDropdownModule
+    MultiselectDropdownModule,
+
   ],
   declarations: [ProductComponent],
   providers: [DataService, UtilityService, UploadService]

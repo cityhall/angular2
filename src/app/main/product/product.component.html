@@ -176,23 +176,24 @@
                       class="form-control" />
                   </div>
                 </div>
+        
                 <div class="row m-b-10 m-l-5 m-r-5">
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                  <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <label>Image
-                        <span class="error">*</span>
-                      </label>
-                      <div class="thumbnail" (click)="openImageExplorer()">
-                        <img src="./../../../assets/images/upload.png" width="40">
+                      <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <label>Image
+                            <span class="error">*</span>
+                          </label>
+                          <div class="thumbnail" (click)="openImageExplorer('image')">
+                            <img src="./../../../assets/images/upload.png" width="40">
+                          </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12" *ngIf="entity.ThumbnailImage">
+                          <img [src]="baseFolder+entity.ThumbnailImage" width="100%">
+                        </div>
                       </div>
                     </div>
-                    <div class="col-md-6 col-sm-6 col-xs-12" *ngIf="entity.ThumbnailImage">
-                      <img [src]="entity.ThumbnailImage" width="100%">
-                    </div>
-                    </div>
                   </div>
-                </div>
 
                 <div class="row m-b-10 m-l-5 m-r-5">
                   <div class="col-md-6 col-sm-12 col-xs-12">
@@ -225,15 +226,20 @@
             <div role="tabpanel" id="more-info" class="tab-pane">
               <div class="form-group row m-b-10 m-l-5 m-r-5">
                 <div class="col-md-12 col-sm-12 col-xs-12">
-                  <label>Mô tả</label>
+                    <label>Mô tả</label>
+                  <div class="thumbnail editor" (click)="openImageExplorer('editor1')">
+                      <img src="./../../../assets/images/upload.png" width="30">
+                    </div>
                   <!-- <textarea id="summernote2" #description="ngModel" [(ngModel)]="entity.Description" name="description" class="form-control" rows="3"></textarea> -->
-                  <ckeditor #description="ngModel" [(ngModel)]="entity.Description" name="description" [config]="myCkeditorConfig">
+                  <ckeditor #description="ngModel"  [(ngModel)]="entity.Description" name="description" [config]="myCkeditorConfig">
                   </ckeditor>
                 </div>
                 <div class="col-md-12 col-sm-12 col-xs-12">
                   <label>Chi tiết sản phẩm</label>
                   <!-- <textarea id="summernote" #content="ngModel" [(ngModel)]="entity.Content" name="content" class="form-control" rows="3"></textarea> -->
-
+                  <div class="thumbnail editor" (click)="openImageExplorer('editor2')">
+                    <img src="./../../../assets/images/upload.png" width="30">
+                  </div>
                   <ckeditor [(ngModel)]="entity.Content" #content="ngModel" name="content" [config]="myCkeditorConfig">
                   </ckeditor>
                 </div>

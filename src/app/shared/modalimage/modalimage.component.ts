@@ -38,6 +38,7 @@ export class ModalimageComponent implements OnInit {
   public listFileImage: any[];
   public ImgSelect: any = {};
   public FparentId: any;
+  public Check: any;
   public listFolderselect: any;
 
   public uploader: FileUploader = new FileUploader({});
@@ -77,7 +78,8 @@ export class ModalimageComponent implements OnInit {
       }, error => this._dataService.handleError(error));
   }
 
-  showImage() {
+  showImage(check:any) {
+    this.Check=check;
     this.loadFolder();
     this.modalAddEdit.show();
   }
@@ -154,6 +156,7 @@ export class ModalimageComponent implements OnInit {
     entity.Path = this.baseFolder + this.ImgSelect.Path;
     entity.NameFullSize = this.ImgSelect.NameFullSize;
     entity.NameThumb = this.ImgSelect.NameThumb;
+    entity.Check = this.Check;
     this.SaveCompolete.emit(entity);
     this.modalAddEdit.hide();
   }
